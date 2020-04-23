@@ -1,0 +1,20 @@
+package zhengchu357;
+
+import static org.junit.Assert.*;
+import junit.framework.TestCase;
+
+import org.junit.Test;
+
+public class functionTest extends TestCase {
+	public void testGetGCD(){
+		function gcd=new function();
+		assertEquals(6,gcd.get(6));
+		assertEquals(16,gcd.get(48));
+		assertEquals(15,gcd.get(45));
+		assertEquals(4,gcd.get(16));	
+	}
+	public void testMain(){
+		
+	}
+
+}

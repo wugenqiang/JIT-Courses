@@ -1,0 +1,23 @@
+package zhengchu357;
+
+import static org.junit.Assert.*;
+import junit.framework.TestCase;
+
+import org.junit.Test;
+
+
+public class functionTest extends TestCase {
+	@Test
+	public void testGet(){
+		function abc=new function();
+		assertEquals(3,abc.get(6));
+		
+		assertEquals(4,abc.get(48));
+		assertEquals(15,abc.get(45));
+		assertEquals(4,abc.get(16));	
+	}
+	public void testMain(){
+		
+	}
+
+}

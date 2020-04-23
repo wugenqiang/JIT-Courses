@@ -1,0 +1,41 @@
+--- 信息 2017年5月25日 下午04时46分55秒   脚本开始 [Script4]
+	line_number = 1
+	script_iter_count = 0
+	script_name = Script4
+	script_id = Script4.java
+
+--- 信息 2017年5月25日 下午04时46分55秒   启动应用程序 [ClassicsJavaA]
+	name = ClassicsJavaA
+	line_number = 28
+	script_name = Script4
+	startapp_type = JAVA
+	startapp_executable = ClassicsJavaA.jar
+	startapp_working_directory = C:\Program Files\IBM\SDP\FunctionalTester\FTSamples
+	startapp_arguments =  
+
++++ 通过 2017年5月25日 下午04时46分58秒   验证点 [RememberPassword_text] 通过。
+	vp_type = object_data
+	name = RememberPassword_text
+	script_name = Script4
+	line_number = 34
+	script_id = Script4.java
+	baseline = resources\Script4.RememberPassword_text.base.rftvp
+	expected = Script4.0000.RememberPassword_text.exp.rftvp
+
+*** 失败 2017年5月25日 下午04时46分58秒   验证点 [_1999_text] 失败。
+	vp_type = object_data
+	name = _1999_text
+	script_name = Script4
+	line_number = 40
+	script_id = Script4.java
+	baseline = resources\Script4._1999_text.base.rftvp
+	expected = Script4.0000._1999_text.exp.rftvp
+	actual = Script4.0001.0000._1999_text.act.rftvp
+
++++ 通过 2017年5月25日 下午04时47分00秒   验证点 [PlaceOrder_standard] 通过。
+	vp_type = object_property
+	name = PlaceOrder_standard
+	script_name = Script4
+	line_number = 52
+	script_id = Script4.java
+	baseline = resources\Script4.PlaceOrder_standard.base.rftvp

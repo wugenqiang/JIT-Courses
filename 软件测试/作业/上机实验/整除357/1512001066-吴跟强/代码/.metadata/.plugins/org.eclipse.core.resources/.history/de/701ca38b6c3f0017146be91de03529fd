@@ -1,0 +1,19 @@
+package zhengchu357;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class functionTest32 {
+
+	@Test
+	public void testGet() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testMain() {
+		fail("Not yet implemented");
+	}
+
+}

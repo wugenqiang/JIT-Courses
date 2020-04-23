@@ -1,0 +1,106 @@
+--- 信息 2017年5月26日 上午09时34分45秒   脚本开始 [OrderTotal]
+	line_number = 1
+	script_iter_count = 0
+	dpStore = { Item : Schubert }, { _1899 : String Quartets Nos. 4 & 14 }, { Quantity : 1 }, { CardNumberIncludeTheSpaces : 1111 }, { creditCombo : Visa }, { ExpirationDate : 11 }, { Name : Trent Culpito }, { Street : 75 Wall St 22nd Fl }, { CityStateZip : NY, NY 12212 }, { Phone : 212-552-1867 }, { total : $19.99 }
+	script_name = OrderTotal
+	script_id = OrderTotal.java
+	scriptDpName = resources\OrderTotal.rftxdp
+
+--- 信息 2017年5月26日 上午09时34分45秒   启动应用程序 [ClassicsJavaA]
+	name = ClassicsJavaA
+	line_number = 28
+	script_name = OrderTotal
+	startapp_type = JAVA
+	startapp_executable = ClassicsJavaA.jar
+	startapp_working_directory = C:\Program Files\IBM\SDP\FunctionalTester\FTSamples
+	startapp_arguments =  
+
++++ 通过 2017年5月26日 上午09时34分55秒   验证点 [_1999_text] 通过。
+	vp_type = object_data
+	name = _1999_text
+	script_name = OrderTotal
+	line_number = 55
+	script_id = OrderTotal.java
+	baseline = resources\OrderTotal._1999_text.base.rftvp
+	expected = OrderTotal.0000._1999_text.exp.rftvp
+
++++ 通过 2017年5月26日 上午09时34分56秒   脚本结束 [OrderTotal]
+	script_name = OrderTotal
+	script_id = OrderTotal.java
+
+--- 信息 2017年5月26日 上午09时34分56秒   脚本开始 [OrderTotal]
+	line_number = 1
+	script_iter_count = 1
+	dpStore = { Item : Schubert }, { _1899 : String Quartets Nos. 4 & 14 }, { Quantity : 2 }, { CardNumberIncludeTheSpaces : 2222 }, { creditCombo : Visa }, { ExpirationDate : 22 }, { Name : Trent Culpito }, { Street : 75 Wall St 22nd Fl }, { CityStateZip : NY, NY 12212 }, { Phone : 212-552-1867 }, { total : $38.98 }
+	script_name = OrderTotal
+	script_id = OrderTotal.java
+	scriptDpName = resources\OrderTotal.rftxdp
+
+--- 信息 2017年5月26日 上午09时34分56秒   启动应用程序 [ClassicsJavaA]
+	name = ClassicsJavaA
+	line_number = 28
+	script_name = OrderTotal
+	startapp_type = JAVA
+	startapp_executable = ClassicsJavaA.jar
+	startapp_working_directory = C:\Program Files\IBM\SDP\FunctionalTester\FTSamples
+	startapp_arguments =  
+
+>>> 警告(W) 2017年5月26日 上午09时35分26秒   对象识别较困难（在警告阈值以上）
+	ObjectLookedFor = GuiTestObject(名称：_1999，映射：_1999)
+	objectFound = 识别分数 = 15,000，警告阈值 = 10,000
+{text=$38.98, accessibleContext.accessibleName=$38.98, name=totalPrice, .classIndex=9}
+	script_name = OrderTotal
+	line_number = 55
+	script_id = OrderTotal.java
+
++++ 通过 2017年5月26日 上午09时35分26秒   验证点 [_1999_text] 通过。
+	vp_type = object_data
+	name = _1999_text
+	script_name = OrderTotal
+	line_number = 55
+	script_id = OrderTotal.java
+	baseline = resources\OrderTotal._1999_text.base.rftvp
+	expected = OrderTotal.0001._1999_text.exp.rftvp
+
+>>> 警告(W) 2017年5月26日 上午09时35分27秒   脚本结束 [OrderTotal]
+	script_name = OrderTotal
+	script_id = OrderTotal.java
+
+--- 信息 2017年5月26日 上午09时35分27秒   脚本开始 [OrderTotal]
+	line_number = 1
+	script_iter_count = 2
+	dpStore = { Item : Schubert }, { _1899 : String Quartets Nos. 4 & 14 }, { Quantity : 3 }, { CardNumberIncludeTheSpaces : 3333 }, { creditCombo : Visa }, { ExpirationDate : 33 }, { Name : Trent Culpito }, { Street : 75 Wall St 22nd Fl }, { CityStateZip : NY, NY 12212 }, { Phone : 212-552-1867 }, { total : $57.97 }
+	script_name = OrderTotal
+	script_id = OrderTotal.java
+	scriptDpName = resources\OrderTotal.rftxdp
+
+--- 信息 2017年5月26日 上午09时35分27秒   启动应用程序 [ClassicsJavaA]
+	name = ClassicsJavaA
+	line_number = 28
+	script_name = OrderTotal
+	startapp_type = JAVA
+	startapp_executable = ClassicsJavaA.jar
+	startapp_working_directory = C:\Program Files\IBM\SDP\FunctionalTester\FTSamples
+	startapp_arguments =  
+
+>>> 警告(W) 2017年5月26日 上午09时35分57秒   对象识别较困难（在警告阈值以上）
+	ObjectLookedFor = GuiTestObject(名称：_1999，映射：_1999)
+	objectFound = 识别分数 = 15,000，警告阈值 = 10,000
+{text=$57.97, accessibleContext.accessibleName=$57.97, name=totalPrice, .classIndex=9}
+	script_name = OrderTotal
+	line_number = 55
+	script_id = OrderTotal.java
+
++++ 通过 2017年5月26日 上午09时35分57秒   验证点 [_1999_text] 通过。
+	vp_type = object_data
+	name = _1999_text
+	script_name = OrderTotal
+	line_number = 55
+	script_id = OrderTotal.java
+	baseline = resources\OrderTotal._1999_text.base.rftvp
+	expected = OrderTotal.0002._1999_text.exp.rftvp
+
+>>> 警告(W) 2017年5月26日 上午09时35分58秒   脚本结束 [OrderTotal]
+	script_name = OrderTotal
+	script_id = OrderTotal.java
+
