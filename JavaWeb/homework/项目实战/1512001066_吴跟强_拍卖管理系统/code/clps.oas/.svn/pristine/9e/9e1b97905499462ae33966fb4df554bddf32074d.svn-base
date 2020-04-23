@@ -1,0 +1,172 @@
+/**    
+ * @Title: ExcelUtilTest.java  
+ * @Package com.clps.oas.util.excel  
+ * @Description: 工具类导入导出测试 
+ * @author weigion.wu(吴跟强)    
+ * @date  2018-05-14 14:17:07
+ * @version V1.0    
+ */
+package com.clps.oas.util.excel;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.clps.oas.sm.dao.AccountMapper;
+import com.clps.oas.sm.dao.DepartmentMapper;
+import com.clps.oas.sm.dao.PositionMapper;
+import com.clps.oas.sm.pojo.Account;
+import com.clps.oas.sm.pojo.Department;
+import com.clps.oas.sm.pojo.Position;
+import com.clps.oas.sm.vo.AccountVo;
+import com.clps.oas.util.factory.UtilFactory;
+import com.clps.oas.util.mybatis.MyBatisUtil;
+
+
+/**
+ * 
+ * @ClassName: ExcelUtilTest
+ * @Description: 工具类导入导出测试
+ * @author weigion.wu
+ * @date 2018-05-14 14:17:07
+ *
+ */
+public class ExcelUtilTest {
+
+	private Logger logger = Logger.getLogger(ExcelUtilTest.class);
+
+	private SqlSessionFactory sf = null;
+	private SqlSession session = null;
+	private AccountMapper accountDao = null;
+	private List<AccountVo> accounts = new ArrayList<AccountVo>();
+	private DepartmentMapper departmentDao = null;
+	private List<Department> departments = new ArrayList<Department>();
+	private PositionMapper positionDao = null;
+	private List<Position> positions = new ArrayList<Position>();
+
+	@Before
+	public void setUp() throws Exception {
+		this.sf = MyBatisUtil.getSqlSessionFactory();
+		this.session = sf.openSession();
+		this.accountDao = session.getMapper(AccountMapper.class);
+		this.departmentDao = session.getMapper(DepartmentMapper.class);
+		this.positionDao = session.getMapper(PositionMapper.class);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	// 测试导出Account信息到excel中
+	@Test
+	public void testExportAccountInfoToExcel() {
+
+		accounts = accountDao.queryAllAccounts();
+		Iterator<AccountVo> its = accounts.iterator();
+		while (its.hasNext()) {
+			logger.info(its.next());
+		}
+
+		FileOutputStream out = null;
+		try {
+			out = new FileOutputStream("src\\main\\webapp\\doc\\excel\\account.xls");
+		} catch (FileNotFoundException e) {
+			logger.error(e.getMessage());
+		}
+
+		logger.info(UtilFactory.getInstanceOfExcelUtilHandleAccountInfo().exportToExcel(accounts, "账户信息", 65536, out));
+		logger.info("执行完毕");
+	}
+
+	// 测试从excel中导入ACCOUNT信息
+	@Test
+	public void testImportAccountInfoFromExcel() {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("src\\main\\webapp\\doc\\excel\\account.xls");
+
+			logger.info(UtilFactory.getInstanceOfExcelUtilHandleAccountInfo().importFromExcel("账户信息", fis));
+		} catch (FileNotFoundException e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	// 测试导出Department信息到excel中
+	@Test
+	public void testExportDepartmentInfoToExcel() {
+
+		departments = departmentDao.queryAllDepartments();
+		Iterator<Department> its = departments.iterator();
+		while (its.hasNext()) {
+			logger.info(its.next());
+		}
+
+		FileOutputStream out = null;
+		try {
+			out = new FileOutputStream("src\\main\\webapp\\doc\\excel\\department.xls");
+		} catch (FileNotFoundException e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+
+		logger.info(UtilFactory.getInstanceOfExcelUtilHandleDepartmentInfo().exportToExcel(departments, "部门信息", 65536, out));
+		logger.info("执行完毕");
+	}
+
+	// 测试从excel中导入Department信息
+	@Test
+	public void testImportDepartmentInfoFromExcel() {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("src\\main\\webapp\\doc\\excel\\department.xls");
+
+			logger.info(UtilFactory.getInstanceOfExcelUtilHandleDepartmentInfo().importFromExcel("部门信息", fis));
+		} catch (FileNotFoundException e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	// 测试导出Position信息到excel中
+	@Test
+	public void testExportPositionInfoToExcel() {
+
+		positions = positionDao.queryAllPositions();
+		Iterator<Position> its = positions.iterator();
+		while (its.hasNext()) {
+			logger.info(its.next());
+		}
+
+		FileOutputStream out = null;
+		try {
+			out = new FileOutputStream("src\\main\\webapp\\doc\\excel\\position.xls");
+		} catch (FileNotFoundException e) {
+			logger.error(e.getMessage());
+		}
+
+		logger.info(UtilFactory.getInstanceOfExcelUtilHandlePositionInfo().exportToExcel(positions, "职位信息", 65536, out));
+		logger.info("执行完毕");
+	}
+
+	// 测试从excel中导入Position信息
+	@Test
+	public void testImportPositionInfoFromExcel() {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("src\\main\\webapp\\doc\\excel\\position.xls");
+
+			logger.info(UtilFactory.getInstanceOfExcelUtilHandlePositionInfo().importFromExcel("职位信息", fis));
+		} catch (FileNotFoundException e) {
+			logger.error(e.getMessage());
+		}
+	}
+}

@@ -1,0 +1,107 @@
+
+/*
+* Copyright @ 2018 com.jit
+* clps.oas 下午2:56:41
+* All right reserved.
+*
+*/
+	
+package com.clps.oas.sm.service.impl;
+/**  
+* @Title: RoleServiceImplTest.java  
+* @Package com.clps.oas.sm.service.impl  
+* @Description: TODO 
+* @author leo.jiang  
+* @date 2018年5月14日  
+* @version V1.0  
+*/
+
+
+import java.util.Iterator;
+
+import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.clps.oas.sm.pojo.Role;
+import com.clps.oas.sm.service.IRoleService;
+
+
+
+/**
+* @desc: clps.oas
+* @author: leo.jiang
+* @createTime: 2018年5月14日 下午2:56:41
+* @history:
+* @version: v1.0
+*/
+
+public class RoleServiceImplTest {
+
+	private Logger logger = Logger.getLogger(RoleServiceImplTest.class);
+	@Autowired
+	private IRoleService irs;
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	/**
+	 * Test method for {@link com.clps.mms.service.impl.RoleServiceImpl#addRole(com.clps.mms.sm.pojo.Role)}.
+	 */
+	@Test
+	public void testAddRole() {
+		irs.addRole(null);
+	}
+
+	@Test
+	public void testShowRoles(){
+		Iterator<Role> its = irs.showRoles().iterator();
+		while(its.hasNext()){
+			logger.info(its.next());
+		}
+	}
+
+	@Test
+	public void testDeleteRoleById(){
+        try {
+			String i = irs.deleteRoleById(4);
+			if(i == "3333-1")
+				logger.info("delete success");
+		} catch (Exception e) {
+			logger.error("delete fail");
+		}
+		
+	}
+	
+	@Test
+	public void testUpdateRole(){
+        Role role = new Role();
+		role.setRoleId(2);
+		role.setRoleName("erwin.wang");
+		role.setRoleLevel("2");
+		role.setRoleComment("222");
+		role.setRoleDefault1("");
+		role.setRoleDefault2("");
+		try {
+			String i = irs.updateRole(role);
+			if(i == "2222-1")
+				logger.info("update success");
+		} catch (Exception e) {
+			logger.error("update fail");
+		}
+		
+	}	
+
+}

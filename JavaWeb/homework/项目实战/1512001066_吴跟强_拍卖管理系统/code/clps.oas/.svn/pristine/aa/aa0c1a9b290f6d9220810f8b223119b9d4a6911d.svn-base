@@ -1,0 +1,232 @@
+package com.clps.oas.sm.vo;
+
+import java.util.Date;
+
+import com.clps.oas.util.excel.ExcelAttribute;
+
+public class AccountVo {
+
+	@ExcelAttribute(name = "账户编号", column = "A")
+	private String accountId;
+
+	@ExcelAttribute(name = "账户姓名", column = "B")
+	private String accountName;
+
+	private String accountRealName;
+
+	private String accountPass;
+
+	private String accountMail;
+
+	private String accountProvince;
+
+	private String accountCity;
+
+	private String accountDistrict;
+
+	private String accountAddress;
+
+	private String accountPhone;
+
+	private String accountTelephone;
+
+	private String accountRoleName;
+
+	private String accountPositionName;
+
+	private String accountDepartmentName;
+
+	private String accountCompanyId;
+
+	private Date accountCreatedDatetime;
+
+	private Date accountUpdatedDatetime;
+
+	private Boolean accountIsvalid;
+
+	public AccountVo() {
+		super();
+	}
+
+	public AccountVo(String accountName, String accountRealName, String accountPass, String accountMail,
+			String accountProvince, String accountCity, String accountDistrict, String accountAddress,
+			String accountPhone, String accountTelephone, String accountRoleName, String accountPositionName,
+			String accountDepartmentName, String accountCompanyId, Date accountCreatedDatetime,
+			Date accountUpdatedDatetime, Boolean accountIsvalid) {
+		super();
+		this.accountName = accountName;
+		this.accountRealName = accountRealName;
+		this.accountPass = accountPass;
+		this.accountMail = accountMail;
+		this.accountProvince = accountProvince;
+		this.accountCity = accountCity;
+		this.accountDistrict = accountDistrict;
+		this.accountAddress = accountAddress;
+		this.accountPhone = accountPhone;
+		this.accountTelephone = accountTelephone;
+		this.accountRoleName = accountRoleName;
+		this.accountPositionName = accountPositionName;
+		this.accountDepartmentName = accountDepartmentName;
+		this.accountCompanyId = accountCompanyId;
+		this.accountCreatedDatetime = accountCreatedDatetime;
+		this.accountUpdatedDatetime = accountUpdatedDatetime;
+		this.accountIsvalid = accountIsvalid;
+	}
+
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+
+	public String getAccountRealName() {
+		return accountRealName;
+	}
+
+	public void setAccountRealName(String accountRealName) {
+		this.accountRealName = accountRealName;
+	}
+
+	public String getAccountPass() {
+		return accountPass;
+	}
+
+	public void setAccountPass(String accountPass) {
+		this.accountPass = accountPass;
+	}
+
+	public String getAccountMail() {
+		return accountMail;
+	}
+
+	public void setAccountMail(String accountMail) {
+		this.accountMail = accountMail;
+	}
+
+	public String getAccountProvince() {
+		return accountProvince;
+	}
+
+	public void setAccountProvince(String accountProvince) {
+		this.accountProvince = accountProvince;
+	}
+
+	public String getAccountCity() {
+		return accountCity;
+	}
+
+	public void setAccountCity(String accountCity) {
+		this.accountCity = accountCity;
+	}
+
+	public String getAccountDistrict() {
+		return accountDistrict;
+	}
+
+	public void setAccountDistrict(String accountDistrict) {
+		this.accountDistrict = accountDistrict;
+	}
+
+	public String getAccountAddress() {
+		return accountAddress;
+	}
+
+	public void setAccountAddress(String accountAddress) {
+		this.accountAddress = accountAddress;
+	}
+
+	public String getAccountPhone() {
+		return accountPhone;
+	}
+
+	public void setAccountPhone(String accountPhone) {
+		this.accountPhone = accountPhone;
+	}
+
+	public String getAccountTelephone() {
+		return accountTelephone;
+	}
+
+	public void setAccountTelephone(String accountTelephone) {
+		this.accountTelephone = accountTelephone;
+	}
+
+	public String getAccountRoleName() {
+		return accountRoleName;
+	}
+
+	public void setAccountRoleName(String accountRoleName) {
+		this.accountRoleName = accountRoleName;
+	}
+
+	public String getAccountPositionName() {
+		return accountPositionName;
+	}
+
+	public void setAccountPositionName(String accountPositionName) {
+		this.accountPositionName = accountPositionName;
+	}
+
+	public String getAccountDepartmentName() {
+		return accountDepartmentName;
+	}
+
+	public void setAccountDepartmentName(String accountDepartmentName) {
+		this.accountDepartmentName = accountDepartmentName;
+	}
+
+	public String getAccountCompanyId() {
+		return accountCompanyId;
+	}
+
+	public void setAccountCompanyId(String accountCompanyId) {
+		this.accountCompanyId = accountCompanyId;
+	}
+
+	public Date getAccountCreatedDatetime() {
+		return accountCreatedDatetime;
+	}
+
+	public void setAccountCreatedDatetime(Date accountCreatedDatetime) {
+		this.accountCreatedDatetime = accountCreatedDatetime;
+	}
+
+	public Date getAccountUpdatedDatetime() {
+		return accountUpdatedDatetime;
+	}
+
+	public void setAccountUpdatedDatetime(Date accountUpdatedDatetime) {
+		this.accountUpdatedDatetime = accountUpdatedDatetime;
+	}
+
+	public Boolean getAccountIsvalid() {
+		return accountIsvalid;
+	}
+
+	public void setAccountIsvalid(Boolean accountIsvalid) {
+		this.accountIsvalid = accountIsvalid;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountVo [accountId=" + accountId + ", accountName=" + accountName + ", accountRealName="
+				+ accountRealName + ", accountMail=" + accountMail + ", accountProvince=" + accountProvince
+				+ ", accountCity=" + accountCity + ", accountDistrict=" + accountDistrict + ", accountAddress="
+				+ accountAddress + ", accountPhone=" + accountPhone + ", accountTelephone=" + accountTelephone
+				+ ", accountRoleName=" + accountRoleName + ", accountPositionName=" + accountPositionName
+				+ ", accountDepartmentName=" + accountDepartmentName + ", accountCompanyId=" + accountCompanyId
+				+ ", accountCreatedDatetime=" + accountCreatedDatetime + ", accountUpdatedDatetime="
+				+ accountUpdatedDatetime + "]";
+	}
+
+}
