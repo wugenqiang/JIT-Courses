@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.sjtu.user.model.Cart" table="cart">
+
+		<id name="cartId" column="cartId" type="java.lang.Long">
+
+			<!-- The generator-class attribute of @hibernate.id is deprecated, use the @hibernate.generator tag instead -->
+			<generator class="native">
+
+			</generator>
+
+		</id>
+
+		<property name="userId" column="userId" length="20">
+
+		</property>
+
+		<property name="cartCommodityNumber"
+			column="cartCommodityNumber" length="10" not-null="true">
+
+		</property>
+
+	</class>
+
+</hibernate-mapping>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MenuConfig>
+	<Displayers>
+		<Displayer name="Velocity"
+			type="net.sf.navigator.displayer.VelocityMenuDisplayer" />
+	</Displayers>
+	<Menus>
+		<Menu name="MainMenu" title="mainMenu.title"
+			page="/searchCommodity.html" />
+		<Menu name="UserMenu" title="menu.user" description="User Menu"
+			forward="editProfile" />
+		<Menu name="AdminMenu" title="menu.admin"
+			description="Admin Menu" roles="admin" width="120"
+			forward="viewUsers">
+			<Item name="ViewUsers" title="menu.admin.users"
+				forward="viewUsers" />
+			<Item name="ActiveUsers" title="mainMenu.activeUsers"
+				action="activeUsers" />
+			<Item name="ReloadContext" title="menu.admin.reload"
+				action="reload" />
+			<Item name="FlushCache" title="menu.flushCache"
+				action="flush" />
+			<Item name="Clickstream" title="menu.clickstream"
+				page="/clickstreams.jsp" />
+		</Menu>
+		<!--LargeCatalog-START-->
+		<Menu name="LargeCatalogMenu" title="largeCatalogList.title"
+			page="/largeCatalogs.html" roles="admin" />
+		<!--LargeCatalog-END-->
+		<!--MidCatalog-START-->
+		<Menu name="MidCatalogMenu" title="midCatalogList.title"
+			page="/midCatalogs.html" roles="admin" />
+		<!--MidCatalog-END-->
+		<!--SmallCatalog-START-->
+		<Menu name="SmallCatalogMenu" title="smallCatalogList.title"
+			page="/smallCatalogs.html" roles="admin" />
+		<!--SmallCatalog-END-->
+		<!--Commodity-START-->
+		<Menu name="CommodityMenu" title="commodityList.title"
+			page="/commoditys.html" roles="admin" />
+		<!--Commodity-END-->
+		<!--CartCommodity-START-->
+		<Menu name="CartCommodityMenu" title="cartCommodityList.title"
+			page="/cartCommoditys.html" roles="user" />
+		<!--CartCommodity-END-->
+		<!--Ordera-START-->
+		<Menu name="OrderaMenu" title="orderaList.title"
+			page="/orderas.html" roles="admin,user" />
+		<!--Ordera-END-->
+		<Menu name="Logout" title="user.logout" page="/logout.jsp"
+			roles="admin,user" />
+	</Menus>
+</MenuConfig>

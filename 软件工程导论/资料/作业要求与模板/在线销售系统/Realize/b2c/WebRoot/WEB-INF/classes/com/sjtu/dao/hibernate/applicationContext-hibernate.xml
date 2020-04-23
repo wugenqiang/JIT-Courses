@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>com/sjtu/model/Role.hbm.xml</value>
+				<value>com/sjtu/model/User.hbm.xml</value>
+				<value>com/sjtu/admin/model/LargeCatalog.hbm.xml</value>
+				<value>com/sjtu/admin/model/MidCatalog.hbm.xml</value>
+				<value>com/sjtu/admin/model/SmallCatalog.hbm.xml</value>
+				<value>com/sjtu/admin/model/Commodity.hbm.xml</value>
+				<value>com/sjtu/user/model/Cart.hbm.xml</value>
+				<value>com/sjtu/user/model/CartCommodity.hbm.xml</value>
+				<value>com/sjtu/user/model/Ordera.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.query.substitutions">
+					true 'Y', false 'N'
+				</prop>
+				<!-- Create/update the database tables automatically when the JVM starts up
+					<prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<!-- Turn batching off for better error messages under PostgreSQL 
+					<prop key="hibernate.jdbc.batch_size">0</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Generic Dao - can be used when doing standard CRUD -->
+	<bean id="dao" class="com.sjtu.dao.hibernate.BaseDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- LookupDao: Hibernate implementation -->
+	<bean id="lookupDao"
+		class="com.sjtu.dao.hibernate.LookupDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- UserDao: Hibernate implementation -->
+	<bean id="userDao"
+		class="com.sjtu.dao.hibernate.UserDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- RoleDao: Hibernate implementation -->
+	<bean id="roleDao"
+		class="com.sjtu.dao.hibernate.RoleDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Add new Daos here -->
+	<!--LargeCatalog-START-->
+	<bean id="largeCatalogDao"
+		class="com.sjtu.admin.dao.hibernate.LargeCatalogDaoHibernate"
+		autowire="byName" />
+	<!--LargeCatalog-END-->
+	<!--MidCatalog-START-->
+	<bean id="midCatalogDao"
+		class="com.sjtu.admin.dao.hibernate.MidCatalogDaoHibernate"
+		autowire="byName" />
+	<!--MidCatalog-END-->
+	<!--SmallCatalog-START-->
+	<bean id="smallCatalogDao"
+		class="com.sjtu.admin.dao.hibernate.SmallCatalogDaoHibernate"
+		autowire="byName" />
+	<!--SmallCatalog-END-->
+	<!--Commodity-START-->
+	<bean id="commodityDao"
+		class="com.sjtu.admin.dao.hibernate.CommodityDaoHibernate"
+		autowire="byName" />
+	<!--Commodity-END-->
+	<!--CartCommodity-START-->
+	<bean id="cartCommodityDao"
+		class="com.sjtu.user.dao.hibernate.CartCommodityDaoHibernate"
+		autowire="byName" />
+	<!--CartCommodity-END-->
+	<!--Cart-START-->
+	<bean id="cartDao"
+		class="com.sjtu.user.dao.hibernate.CartDaoHibernate"
+		autowire="byName" />
+	<!--Cart-END-->
+	<!--Ordera-START-->
+	<bean id="orderaDao"
+		class="com.sjtu.user.dao.hibernate.OrderaDaoHibernate"
+		autowire="byName" />
+	<!--Ordera-END-->
+
+</beans>

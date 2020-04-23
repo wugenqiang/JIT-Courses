@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<!-- ========== Data Sources Definitions =================================== -->
+	<!--
+		Define your Struts data sources in a file called struts-data-sources.xml and place
+		it in your merge directory.
+	-->
+
+	<!-- ========== Form Bean Definitions =================================== -->
+	<form-beans>
+
+		<form-bean name="uploadForm"
+			type="com.sjtu.webapp.form.UploadForm" />
+		<form-bean name="smallCatalogForm"
+			type="com.sjtu.admin.webapp.form.SmallCatalogForm" />
+		<form-bean name="largeCatalogForm"
+			type="com.sjtu.admin.webapp.form.LargeCatalogForm" />
+		<form-bean name="commodityForm"
+			type="com.sjtu.admin.webapp.form.CommodityForm" />
+		<form-bean name="cartForm"
+			type="com.sjtu.user.webapp.form.CartForm" />
+		<form-bean name="cartCommodityForm"
+			type="com.sjtu.user.webapp.form.CartCommodityForm" />
+		<form-bean name="orderaForm"
+			type="com.sjtu.user.webapp.form.OrderaForm" />
+		<form-bean name="roleForm" type="com.sjtu.webapp.form.RoleForm" />
+		<form-bean name="midCatalogForm"
+			type="com.sjtu.admin.webapp.form.MidCatalogForm" />
+
+		<form-bean name="roleForm" type="com.sjtu.webapp.form.RoleForm" />
+		<form-bean name="userForm" type="com.sjtu.webapp.form.UserForm" />
+		<form-bean name="addressForm"
+			type="com.sjtu.webapp.form.AddressForm" />
+
+		<!--
+			If you have non XDoclet forms, define them in a file called struts-forms.xml and
+			place it in your merge directory.
+		-->
+	</form-beans>
+
+	<!-- ========== Global Exceptions Definitions =================================== -->
+	<global-exceptions>
+		<exception type="java.lang.Exception" key="errors.general"
+			handler="com.sjtu.webapp.action.ActionExceptionHandler" />
+	</global-exceptions>
+
+	<!-- ========== Global Forward Definitions =================================== -->
+	<global-forwards>
+		<forward name="mainMenu" path="/mainMenu.html" redirect="true" />
+		<!-- Forwards specified in actions -->
+		<forward name="addUser"
+			path="/editUser.html?method=Add&amp;amp;from=list" redirect="true" />
+		<forward name="cancelUser" path="/editUser.html?method=Cancel" />
+		<forward name="deleteUser" path="/editUser.html?method=Delete" />
+		<forward name="updateUser" path="/userProfile.html" />
+		<!-- Forwards for links used in Menu -->
+		<forward name="editProfile" path="/editProfile.html" />
+		<forward name="editUser" path="/editUser.html" />
+		<forward name="viewUsers" path="/users.html" redirect="true" />
+		<forward name="selectFile" path="/selectFile.html" />
+		<forward name="logout" path="/logout.jsp" />
+	</global-forwards>
+
+	<!-- ========== Action Mapping Definitions =================================== -->
+	<action-mappings>
+		<action path="/uploadFile"
+			type="com.sjtu.webapp.action.UploadAction" name="uploadForm"
+			scope="request" input="failure" unknown="false" validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="failure" path="/WEB-INF/pages/uploadForm.jsp"
+				redirect="false" />
+			<forward name="success"
+				path="/WEB-INF/pages/uploadDisplay.jsp" redirect="false" />
+		</action>
+		<action path="/users" type="com.sjtu.webapp.action.UserAction"
+			name="userForm" scope="request" input="mainMenu" roles="admin"
+			parameter="method" unknown="false" validate="false">
+			<forward name="list" path="/WEB-INF/pages/userList.jsp"
+				redirect="false" />
+			<forward name="edit" path="/WEB-INF/pages/userForm.jsp"
+				redirect="false" />
+		</action>
+		<action path="/editUser"
+			type="com.sjtu.webapp.action.UserAction" name="userForm"
+			scope="request" input="list" roles="admin" parameter="method"
+			unknown="false" validate="false">
+			<forward name="list" path="/WEB-INF/pages/userList.jsp"
+				redirect="false" />
+			<forward name="edit" path="/WEB-INF/pages/userForm.jsp"
+				redirect="false" />
+		</action>
+		<action path="/editProfile"
+			type="com.sjtu.webapp.action.UserAction" name="userForm"
+			scope="request" input="mainMenu" parameter="method" unknown="false"
+			validate="false">
+			<forward name="list" path="/WEB-INF/pages/userList.jsp"
+				redirect="false" />
+			<forward name="edit" path="/WEB-INF/pages/userForm.jsp"
+				redirect="false" />
+		</action>
+		<action path="/saveUser"
+			type="com.sjtu.webapp.action.UserAction" name="userForm"
+			scope="request" input="edit" parameter="method" unknown="false"
+			validate="false">
+			<forward name="list" path="/WEB-INF/pages/userList.jsp"
+				redirect="false" />
+			<forward name="edit" path="/WEB-INF/pages/userForm.jsp"
+				redirect="false" />
+		</action>
+		<action path="/reload"
+			type="com.sjtu.webapp.action.ReloadAction" roles="admin"
+			unknown="false" validate="false">
+		</action>
+		<action path="/largeCatalogs"
+			type="com.sjtu.admin.webapp.action.LargeCatalogAction"
+			name="largeCatalogForm" scope="request" input="mainMenu"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/largeCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/largeCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/largeCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/editLargeCatalog"
+			type="com.sjtu.admin.webapp.action.LargeCatalogAction"
+			name="largeCatalogForm" scope="request" input="list"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/largeCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/largeCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/largeCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/saveLargeCatalog"
+			type="com.sjtu.admin.webapp.action.LargeCatalogAction"
+			name="largeCatalogForm" scope="request" input="edit"
+			parameter="method" unknown="false" validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/largeCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/largeCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/largeCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/smallCatalogs"
+			type="com.sjtu.admin.webapp.action.SmallCatalogAction"
+			name="smallCatalogForm" scope="request" input="mainMenu"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/smallCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/smallCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/smallCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/editSmallCatalog"
+			type="com.sjtu.admin.webapp.action.SmallCatalogAction"
+			name="smallCatalogForm" scope="request" input="list"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/smallCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/smallCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/smallCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/saveSmallCatalog"
+			type="com.sjtu.admin.webapp.action.SmallCatalogAction"
+			name="smallCatalogForm" scope="request" input="edit"
+			parameter="method" unknown="false" validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/smallCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/smallCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/smallCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/midCatalogs"
+			type="com.sjtu.admin.webapp.action.MidCatalogAction"
+			name="midCatalogForm" scope="request" input="mainMenu"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/midCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/midCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/midCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/editMidCatalog"
+			type="com.sjtu.admin.webapp.action.MidCatalogAction"
+			name="midCatalogForm" scope="request" input="list" parameter="method"
+			unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/midCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/midCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/midCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/saveMidCatalog"
+			type="com.sjtu.admin.webapp.action.MidCatalogAction"
+			name="midCatalogForm" scope="request" input="edit" parameter="method"
+			unknown="false" validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/midCatalogForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/midCatalogList.jsp" redirect="false" />
+			<forward name="search" path="/midCatalogs.html"
+				redirect="true" />
+		</action>
+		<action path="/commoditys"
+			type="com.sjtu.admin.webapp.action.CommodityAction"
+			name="commodityForm" scope="request" input="mainMenu"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/commodityForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/commodityList.jsp" redirect="false" />
+			<forward name="search" path="/commoditys.html"
+				redirect="true" />
+		</action>
+		<action path="/editCommodity"
+			type="com.sjtu.admin.webapp.action.CommodityAction"
+			name="commodityForm" scope="request" input="list" parameter="method"
+			unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/commodityForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/commodityList.jsp" redirect="false" />
+			<forward name="search" path="/commoditys.html"
+				redirect="true" />
+		</action>
+		<action path="/saveCommodity"
+			type="com.sjtu.admin.webapp.action.CommodityAction"
+			name="commodityForm" scope="request" input="edit" parameter="method"
+			unknown="false" validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/admin/commodityForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/admin/commodityList.jsp" redirect="false" />
+			<forward name="search" path="/commoditys.html"
+				redirect="true" />
+		</action>
+		<action path="/searchCommodity"
+			type="com.sjtu.search.webapp.action.CommoditySearchAction"
+			name="commodityForm" scope="request" input="mainMenu"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="list"
+				path="/WEB-INF/pages/search/commoditySearch.jsp" redirect="false" />
+			<forward name="search" path="commoditySearch.html"
+				redirect="true" />
+		</action>
+		<action path="/viewCommodity"
+			type="com.sjtu.search.webapp.action.CommoditySearchAction"
+			name="commodityForm" scope="request" input="list" parameter="method"
+			unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="view"
+				path="/WEB-INF/pages/search/commodityView.jsp" redirect="false" />
+			<forward name="search" path="commoditySearch.html"
+				redirect="true" />
+		</action>
+
+
+
+		<action path="/cartCommoditys"
+			type="com.sjtu.user.webapp.action.CartCommodityAction"
+			name="cartCommodityForm" scope="request" input="mainMenu"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/user/cartCommodityForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/user/cartCommodityList.jsp" redirect="false" />
+			<forward name="search" path="/cartCommoditys.html"
+				redirect="true" />
+		</action>
+		<action path="/editCartCommodity"
+			type="com.sjtu.user.webapp.action.CartCommodityAction"
+			name="cartCommodityForm" scope="request" input="list"
+			parameter="method" unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/user/cartCommodityForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/user/cartCommodityList.jsp" redirect="false" />
+			<forward name="search" path="/cartCommoditys.html"
+				redirect="true" />
+		</action>
+		<action path="/saveCartCommodity"
+			type="com.sjtu.user.webapp.action.CartCommodityAction"
+			name="cartCommodityForm" scope="request" input="edit"
+			parameter="method" unknown="false" validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/user/cartCommodityForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/user/cartCommodityList.jsp" redirect="false" />
+			<forward name="search" path="/cartCommoditys.html"
+				redirect="true" />
+		</action>
+		<action path="/carts"
+			type="com.sjtu.user.webapp.action.CartAction" name="cartForm"
+			scope="request" input="mainMenu" parameter="method" unknown="false"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit" path="/WEB-INF/pages/user/cartForm.jsp"
+				redirect="false" />
+			<forward name="list" path="/WEB-INF/pages/user/cartList.jsp"
+				redirect="false" />
+			<forward name="search" path="/carts.html" redirect="true" />
+		</action>
+		<action path="/editCart"
+			type="com.sjtu.user.webapp.action.CartAction" name="cartForm"
+			scope="request" input="list" parameter="method" unknown="false"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit" path="/WEB-INF/pages/user/cartForm.jsp"
+				redirect="false" />
+			<forward name="list" path="/WEB-INF/pages/user/cartList.jsp"
+				redirect="false" />
+			<forward name="search" path="/carts.html" redirect="true" />
+		</action>
+		<action path="/saveCart"
+			type="com.sjtu.user.webapp.action.CartAction" name="cartForm"
+			scope="request" input="edit" parameter="method" unknown="false"
+			validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit" path="/WEB-INF/pages/user/cartForm.jsp"
+				redirect="false" />
+			<forward name="list" path="/WEB-INF/pages/user/cartList.jsp"
+				redirect="false" />
+			<forward name="search" path="/carts.html" redirect="true" />
+		</action>
+		<action path="/orderas"
+			type="com.sjtu.user.webapp.action.OrderaAction" name="orderaForm"
+			scope="request" input="mainMenu" parameter="method" unknown="false"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/user/orderaForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/user/orderaList.jsp" redirect="false" />
+			<forward name="search" path="/orderas.html" redirect="true" />
+		</action>
+		<action path="/editOrdera"
+			type="com.sjtu.user.webapp.action.OrderaAction" name="orderaForm"
+			scope="request" input="list" parameter="method" unknown="false"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/user/orderaForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/user/orderaList.jsp" redirect="false" />
+			<forward name="search" path="/orderas.html" redirect="true" />
+		</action>
+		<action path="/saveOrdera"
+			type="com.sjtu.user.webapp.action.OrderaAction" name="orderaForm"
+			scope="request" input="edit" parameter="method" unknown="false"
+			validate="true">
+			<set-property property="cancellable" value="true" />
+			<forward name="edit"
+				path="/WEB-INF/pages/user/orderaForm.jsp" redirect="false" />
+			<forward name="list"
+				path="/WEB-INF/pages/user/orderaList.jsp" redirect="false" />
+			<forward name="search" path="/orderas.html" redirect="true" />
+		</action>
+		<action path="/viewOrdera"
+			type="com.sjtu.search.webapp.action.OrderaViewAction"
+			name="orderaForm" scope="request" input="mainMenu" parameter="method"
+			unknown="false" validate="false">
+			<set-property property="cancellable" value="true" />
+			<forward name="view"
+				path="/WEB-INF/pages/search/viewOrdera.jsp" redirect="false" />
+			<forward name="search" path="orderas.html"
+				redirect="true" />
+		</action>
+
+
+
+
+		<action path="/signup"
+			type="com.sjtu.webapp.action.SignupAction" name="userForm"
+			scope="request" input="failure" unknown="false" validate="false">
+			<forward name="failure" path="/WEB-INF/pages/signup.jsp"
+				redirect="false" />
+			<forward name="success" path="/mainMenu.html"
+				redirect="true" />
+		</action>
+		<action path="/passwordHint"
+			type="com.sjtu.webapp.action.PasswordHintAction" unknown="false"
+			validate="false">
+			<forward name="previousPage" path="/" redirect="false" />
+		</action>
+
+		<!-- Forwards to the mainMenu tile definition -->
+		<action path="/mainMenu"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/mainMenu.jsp" />
+
+		<!-- Action to flush cache -->
+		<action path="/flush"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/flushCache.jsp" roles="admin" />
+
+		<!-- Forward to page to begin file upload -->
+		<action path="/selectFile"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/uploadForm.jsp" />
+		<!-- Forward to view Active Users -->
+		<action path="/activeUsers"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/WEB-INF/pages/activeUsers.jsp" roles="admin" />
+
+	</action-mappings>
+
+	<controller nocache="true" inputForward="true" maxFileSize="2M" />
+
+	<message-resources parameter="ApplicationResources" />
+
+	<!-- ========== Validator plugin ===================  -->
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,
+                             /WEB-INF/validator-rules-custom.xml,
+                             /WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
