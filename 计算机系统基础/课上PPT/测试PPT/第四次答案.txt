@@ -1,0 +1,19 @@
+pushl %ebp
+movl %esp,%ebp
+movl 8(%ebp), %eax
+movl 12(%ebp),%edx
+cmp $5,%eax
+jl   .L3
+.L1
+cmpl $0,%edx
+je   .L2
+idiv  %edx,%eax
+subl $1,edx 
+cmp $5,%eax
+jge   .L1
+.L2
+movl 0,%eax
+.L3
+movl %ebp,%esp
+popl %ebp
+ret
