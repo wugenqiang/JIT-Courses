@@ -1,0 +1,43 @@
+package com.clps.oas.sm.dao;
+import java.util.List;
+
+import com.clps.oas.sm.pojo.Permission;
+
+/** 
+* @author  noah.zhou 
+* @date 创建时间：2018年5月11日 上午10:40:00 
+* @des PermissionMapper interface
+* @version 1.0 
+* @parameter  
+* @since  
+* @return  
+*/
+
+
+public interface PermissionMapper {
+	/**
+	*
+	* @des 根据permissionId逻辑删除权限
+	*/
+    int deletePermissionById(Integer permissionId);
+    /**
+    *
+    * @des 插入权限
+    */
+    int insertPermission(Permission record);
+    /**
+    *
+    * @des 根据permissionId查询单条权限信息
+    */
+    List<Permission> queryPermissionById(Integer permissionId);
+    /**
+    *
+    * @des 更新权限
+    */
+    int updatePermission(Permission record);
+    /**
+    *
+    * @des 查询所有权限
+    */
+    List<Permission> queryAllPermissions();
+}

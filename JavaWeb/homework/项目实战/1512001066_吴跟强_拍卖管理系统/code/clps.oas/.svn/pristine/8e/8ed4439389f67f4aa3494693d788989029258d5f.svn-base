@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS role;
+
+CREATE TABLE role(
+role_id                 INT(10) NOT NULL auto_increment,
+role_name               VARCHAR(18) NOT NULL,
+role_comment            VARCHAR(18) NOT NULL,
+role_level              VARCHAR(18) NOT NULL,
+role_created_datetime   TIMESTAMP,
+role_created_name       VARCHAR(18),
+role_updated_datetime   TIMESTAMP,
+role_updated_name       VARCHAR(18),
+role_default1           VARCHAR(20),
+role_default2           VARCHAR(20),
+role_isVaild            INT(5),
+PRIMARY KEY(role_id)
+)ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+

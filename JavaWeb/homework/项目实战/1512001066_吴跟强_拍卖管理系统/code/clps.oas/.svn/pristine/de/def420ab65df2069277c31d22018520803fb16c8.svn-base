@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path;
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新增角色</title>
+</head>
+<body>
+	<div id="header" style="background-color: #FFA500; width: 350px;">
+		<h3 style="margin-bottom: 0;">新增角色</h3>
+	</div>
+	<div id="content"
+		style="background-color: #A7C942; height: 450px; width: 350px; float: center;">
+		<form id="addRole" action="<%=basePath%>/sm/roleList" name="myRoleAdd" 
+		onsubmit="return checkForm()" method="post">
+			<table>
+				<tr>
+					<td>角色名称:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><input type="text"  id="roleName" name="RoleName" value="" onblur="checkRoleName()"  ><font
+						color="red">*</font><span class="default" id="nameErr">至少3位</span></td>			 
+				</tr>
+				<tr>
+					<td>角色描述:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><textarea rows="10" cols="30" name="roleComment"></textarea></td>
+				</tr>			
+				<tr>
+					<td>角色等级:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><input type="text" name="roleLevel" value=""><font
+						color="red">*</font></td>
+				</tr>
+				<tr>
+					<td>角色创建时间:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><input type="text" name="roleCreartedDatetime"
+						value="0000-00-00 00:00:00"></td>
+				</tr>				
+				<tr>
+					<td>角色创建人名:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><textarea rows="10" cols="30" name="roleCreatedName"></textarea></td>
+				</tr>
+				<tr>
+					<td>角色修改时间:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><input type="text" name="roleUpdatedDatetime"
+						value="0000-00-00 00:00:00"></td>
+				</tr>				
+				<tr>
+					<td>角色创建人名:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><textarea rows="10" cols="30" name="roleUpdatedName"></textarea></td>
+				</tr>
+				<tr>
+					<td>角色备注1:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><textarea rows="10" cols="30" name="roleDefault1"></textarea></td>
+				</tr>
+				<tr>
+					<td>角色备注2:</td>
+					<td>&nbsp;&nbsp;</td>
+					<td><textarea rows="10" cols="30" name="roleDefault2"></textarea></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;</td>
+					<td>&nbsp;&nbsp;</td>
+					<td>&nbsp;&nbsp;</td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="提交" name="submit"></td>
+					<td>&nbsp;&nbsp;</td>
+					<td><input type="reset" value="重置" name="reset"></td>
+				</tr>
+			</table>
+		</form>
+		<p>Tip：点击"提交"按钮.</p>
+	</div>
+</body>
+</html>

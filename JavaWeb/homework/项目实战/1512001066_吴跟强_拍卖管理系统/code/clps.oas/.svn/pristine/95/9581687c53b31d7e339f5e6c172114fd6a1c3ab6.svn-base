@@ -1,0 +1,35 @@
+package com.clps.oas.sm.controller;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.clps.oas.sm.pojo.Permission;
+import com.clps.oas.sm.service.IPermissionService;
+
+/** 
+* @author  noah.zhou 
+* @date 创建时间：2018年5月14日 下午3:13:14 
+* @description 
+* @version 1.0 
+* @parameter  
+* @since  
+* @return  
+*/
+@Controller
+@RequestMapping(value="/sm")//控制路径为项目名字加上"/sm"
+public class PermissionController {
+
+	@Resource
+	private IPermissionService permissionService;//实例化permissionService
+	@RequestMapping(value="/permissionList")//控制路径为项目名字加上"/sm/permissionList"
+	public String showUser(Model model){
+		List<Permission> permission= permissionService.queryAllPermissions();
+		model.addAttribute("permissions", permission);
+		return "sm/permission_list";//返回查询页面
+	}
+}

@@ -1,0 +1,74 @@
+/**    
+ * @Title: UtilFactory.java  
+ * @Package com.clps.oas.util.factory  
+ * @Description: 对外发布的工具工厂  
+ * @author weigion.wu(吴跟强)    
+ * @date  2018-05-21 10:46:38
+ * @version V1.0    
+ */
+package com.clps.oas.util.factory;
+
+import com.clps.oas.util.date.DateUtil;
+import com.clps.oas.util.excel.ExcelUtil;
+import com.clps.oas.util.excel.vo.Account;
+import com.clps.oas.util.excel.vo.Department;
+import com.clps.oas.util.excel.vo.Position;
+
+
+/**
+ * @ClassName: UtilFactory
+ * @Description: 工具类工厂
+ * @author weigion.wu
+ * @date 2018-05-21 10:46:38
+ */
+public class UtilFactory {
+
+	/**
+	 * 
+	 * @Title: getInstanceOfDateUtil  
+	 * @Description: 日期类工厂化
+	 * @param @return 返回 DateUtil 
+	 * @return DateUtil
+	 * @throws
+	 */
+	public static DateUtil getInstanceOfDateUtil() {
+		return new DateUtil();
+	}
+	
+	/**
+	 * 
+	 * @Title: getInstanceOfExcelUtilHandleAccountVo  
+	 * @Description: 工厂化账户信息导入导出调用  
+	 * @param @return    设定文件  
+	 * @return ExcelUtil<Account>    返回类型  
+	 * @throws
+	 */
+	public static ExcelUtil<Account> getInstanceOfExcelUtilHandleAccountVo(){
+		return new ExcelUtil<Account>();
+	}
+	
+	/**
+	 * 
+	 * @Title: getInstanceOfExcelUtilHandleDepartmentVo 
+	 * @Description: 工厂化部门信息导入导出调用    
+	 * @param @return    设定文件  
+	 * @return ExcelUtil<Department>    返回类型  
+	 * @throws
+	 */
+	public static ExcelUtil<Department> getInstanceOfExcelUtilHandleDepartmentVo(){
+		return new ExcelUtil<Department>();
+	}
+
+	/**
+	 * 
+	 * @Title: getInstanceOfExcelUtilHandlePositionVo  
+	 * @Description: 工厂化职位信息导入导出调用    
+	 * @param @return    设定文件  
+	 * @return ExcelUtil<Position>    返回类型  
+	 * @throws
+	 */
+	public static ExcelUtil<Position> getInstanceOfExcelUtilHandlePositionVo(){
+		return new ExcelUtil<Position>();
+	}
+
+}

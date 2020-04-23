@@ -1,0 +1,102 @@
+
+/*
+* Copyright @ 2018 com.jit
+* clps.oas 下午2:32:01
+* All right reserved.
+*
+*/
+	
+package com.clps.oas.sm.service.impl;
+/**  
+* @Title: RoleServiceImpl.java  
+* @Package com.clps.oas.sm.service.impl  
+* @Description: TODO 
+* @author leo.jiang  
+* @date 2018年5月14日  
+* @version V1.0  
+*/
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.clps.oas.common.ParamCommon;
+import com.clps.oas.sm.dao.RoleMapper;
+import com.clps.oas.sm.pojo.Role;
+import com.clps.oas.sm.service.IRoleService;
+
+/**
+* @desc: clps.oas
+* @author: leo.jiang
+* @createTime: 2018年5月14日 下午2:32:01
+* @history:
+* @version: v1.0
+*/
+
+public class RoleServiceImpl implements IRoleService {
+
+	
+	private Logger logger = Logger.getLogger(RoleServiceImpl.class);
+	@Autowired
+	 private RoleMapper roleDao;
+	
+	
+	public void init(){
+		logger.info("RoleService init() invoke...");
+	}	
+	/*
+	*(non-Javadoc)
+	* @see com.clps.oas.sm.service.IRoleService#addRole(com.clps.oas.sm.pojo.Role)
+	*/
+
+	@Override
+	public String addRole(Role role) {
+		if(role!=null){
+			if(this.roleDao.insertRole(role)>0){
+				return ParamCommon.ADD_SUCCESS;
+			}else{
+				return ParamCommon.ADD_FAILURE;
+			}
+		}
+		return ParamCommon.ADD_FAILURE;
+	}
+
+	/*
+	*(non-Javadoc)
+	* @see com.clps.oas.sm.service.IRoleService#showRoles()
+	*/
+
+	@Override
+	public List<Role> showRoles() {
+		return this.roleDao.queryAllRoles();
+	}
+
+	/*
+	*(non-Javadoc)
+	* @see com.clps.oas.sm.service.IRoleService#deleteRoleById(java.lang.Integer)
+	*/
+
+	@Override
+	public String deleteRoleById(Integer roleId) {
+		if(this.roleDao.deleteByRoleId(roleId)>0){
+			return ParamCommon.DELETE_SUCCESS;
+		}else{
+		return "delete fail";
+		}
+	}
+
+	/*
+	*(non-Javadoc)
+	* @see com.clps.oas.sm.service.IRoleService#updateRole(com.clps.oas.sm.pojo.Role)
+	*/
+
+	@Override
+	public String updateRole(Role role) {
+		if(this.roleDao.updateByRoleId(role)>0){
+			return ParamCommon.UPDATE_SUCCESS;
+		}
+		return "update fail";
+	}
+
+}

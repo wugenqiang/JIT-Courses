@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="context1">
+		 <!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+		<!-- auto generator comment -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+		<!-- db connection -->
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/test" 
+			driverClass="com.mysql.jdbc.Driver"
+			password="123456" userId="root" />
+		<javaModelGenerator targetPackage="com.clps.mms.sm.pojo"
+			targetProject="clps.mms/src/main/java" />
+			
+		<sqlMapGenerator targetPackage="com.clps.mms.sm.xml" 
+			targetProject="clps.mms/src/main/java" />
+			
+		<javaClientGenerator targetPackage="com.clps.mms.sm.dao"
+			targetProject="clps.mms/src/main/java" type="XMLMAPPER">
+			<!-- schema 是否需要后缀 -->
+			<property name="enableSubPackage" value="false"/>
+			<property name="trimStrings" value="true"/>
+		</javaClientGenerator>
+		<!-- <table tableName="user" domainObjectName="UserInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			columnOverride column="???" property="???"
+		</table> -->
+		<table tableName="sm_user" domainObjectName="User"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="user_id" sqlStatement="Mysql"/>
+		</table>
+	</context>
+</generatorConfiguration>

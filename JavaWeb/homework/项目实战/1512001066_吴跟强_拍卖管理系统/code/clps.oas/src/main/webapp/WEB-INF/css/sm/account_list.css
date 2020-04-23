@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.tablelist table {
+	width:100%;
+	margin:15px 0
+}
+.tablelist th {
+	background-color:#1E90FF;
+	color:#FFFFFF
+}
+.tablelist,.tablelist th,.tablelist td
+{
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border:1px solid #7ebffe;
+	border-collapse:collapse
+}
+.tablelist tr:nth-child(odd){
+	background-color:#b4dafe;
+}
+.tablelist tr:nth-child(even){
+	background-color:#fdfdfd;
+}

@@ -1,0 +1,274 @@
+/**    
+ * @Title: Account.java  
+ * @Package com.clps.oas.util.excel.vo  
+ * @Description:账户信息导入导出部分字段   
+ * @author weigion.wu(吴跟强)    
+ * @date  2018-05-21 22:02:09
+ * @version V1.0    
+ */
+package com.clps.oas.util.excel.vo;
+
+/**
+ * @ClassName: Account
+ * @Description:账户信息导入导出部分字段
+ * @author weigion.wu
+ * @date 2018-05-21 22:02:09
+ */
+public class Account {
+
+	private Integer accountId;
+
+	private String accountName;
+
+	private String accountRealName;
+
+	private String accountMail;
+
+	private String accountProvince;
+
+	private String accountCity;
+
+	private String accountDistrict;
+
+	private String accountAddress;
+
+	private String accountPhone;
+
+	private String accountTelephone;
+
+	private Integer accountRoleId;
+
+	private Integer accountPositionId;
+
+	private Integer accountDepartmentId;
+
+	private Integer accountCompanyId;
+
+	/**
+	 * @return the accountId
+	 */
+	public Integer getAccountId() {
+		return accountId;
+	}
+
+	/**
+	 * @param accountId
+	 *            the accountId to set
+	 */
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+
+	/**
+	 * @return the accountName
+	 */
+	public String getAccountName() {
+		return accountName;
+	}
+
+	/**
+	 * @param accountName
+	 *            the accountName to set
+	 */
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+
+	/**
+	 * @return the accountRealName
+	 */
+	public String getAccountRealName() {
+		return accountRealName;
+	}
+
+	/**
+	 * @param accountRealName
+	 *            the accountRealName to set
+	 */
+	public void setAccountRealName(String accountRealName) {
+		this.accountRealName = accountRealName;
+	}
+
+	/**
+	 * @return the accountMail
+	 */
+	public String getAccountMail() {
+		return accountMail;
+	}
+
+	/**
+	 * @param accountMail
+	 *            the accountMail to set
+	 */
+	public void setAccountMail(String accountMail) {
+		this.accountMail = accountMail;
+	}
+
+	/**
+	 * @return the accountProvince
+	 */
+	public String getAccountProvince() {
+		return accountProvince;
+	}
+
+	/**
+	 * @param accountProvince
+	 *            the accountProvince to set
+	 */
+	public void setAccountProvince(String accountProvince) {
+		this.accountProvince = accountProvince;
+	}
+
+	/**
+	 * @return the accountCity
+	 */
+	public String getAccountCity() {
+		return accountCity;
+	}
+
+	/**
+	 * @param accountCity
+	 *            the accountCity to set
+	 */
+	public void setAccountCity(String accountCity) {
+		this.accountCity = accountCity;
+	}
+
+	/**
+	 * @return the accountDistrict
+	 */
+	public String getAccountDistrict() {
+		return accountDistrict;
+	}
+
+	/**
+	 * @param accountDistrict
+	 *            the accountDistrict to set
+	 */
+	public void setAccountDistrict(String accountDistrict) {
+		this.accountDistrict = accountDistrict;
+	}
+
+	/**
+	 * @return the accountAddress
+	 */
+	public String getAccountAddress() {
+		return accountAddress;
+	}
+
+	/**
+	 * @param accountAddress
+	 *            the accountAddress to set
+	 */
+	public void setAccountAddress(String accountAddress) {
+		this.accountAddress = accountAddress;
+	}
+
+	/**
+	 * @return the accountPhone
+	 */
+	public String getAccountPhone() {
+		return accountPhone;
+	}
+
+	/**
+	 * @param accountPhone
+	 *            the accountPhone to set
+	 */
+	public void setAccountPhone(String accountPhone) {
+		this.accountPhone = accountPhone;
+	}
+
+	/**
+	 * @return the accountTelephone
+	 */
+	public String getAccountTelephone() {
+		return accountTelephone;
+	}
+
+	/**
+	 * @param accountTelephone
+	 *            the accountTelephone to set
+	 */
+	public void setAccountTelephone(String accountTelephone) {
+		this.accountTelephone = accountTelephone;
+	}
+
+	/**
+	 * @return the accountRoleId
+	 */
+	public Integer getAccountRoleId() {
+		return accountRoleId;
+	}
+
+	/**
+	 * @param accountRoleId
+	 *            the accountRoleId to set
+	 */
+	public void setAccountRoleId(Integer accountRoleId) {
+		this.accountRoleId = accountRoleId;
+	}
+
+	/**
+	 * @return the accountPositionId
+	 */
+	public Integer getAccountPositionId() {
+		return accountPositionId;
+	}
+
+	/**
+	 * @param accountPositionId
+	 *            the accountPositionId to set
+	 */
+	public void setAccountPositionId(Integer accountPositionId) {
+		this.accountPositionId = accountPositionId;
+	}
+
+	/**
+	 * @return the accountDepartmentId
+	 */
+	public Integer getAccountDepartmentId() {
+		return accountDepartmentId;
+	}
+
+	/**
+	 * @param accountDepartmentId
+	 *            the accountDepartmentId to set
+	 */
+	public void setAccountDepartmentId(Integer accountDepartmentId) {
+		this.accountDepartmentId = accountDepartmentId;
+	}
+
+	/**
+	 * @return the accountCompanyId
+	 */
+	public Integer getAccountCompanyId() {
+		return accountCompanyId;
+	}
+
+	/**
+	 * @param accountCompanyId
+	 *            the accountCompanyId to set
+	 */
+	public void setAccountCompanyId(Integer accountCompanyId) {
+		this.accountCompanyId = accountCompanyId;
+	}
+
+	/*
+	 * (non-Javadoc) <p>Title: toString</p> <p>Description: </p>
+	 * 
+	 * @return
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Account [accountId=" + accountId + ", accountName=" + accountName + ", accountRealName="
+				+ accountRealName + ", accountMail=" + accountMail + ", accountProvince=" + accountProvince
+				+ ", accountCity=" + accountCity + ", accountDistrict=" + accountDistrict + ", accountAddress="
+				+ accountAddress + ", accountPhone=" + accountPhone + ", accountTelephone=" + accountTelephone
+				+ ", accountRoleId=" + accountRoleId + ", accountPositionId=" + accountPositionId
+				+ ", accountDepartmentId=" + accountDepartmentId + ", accountCompanyId=" + accountCompanyId + "]";
+	}
+
+}

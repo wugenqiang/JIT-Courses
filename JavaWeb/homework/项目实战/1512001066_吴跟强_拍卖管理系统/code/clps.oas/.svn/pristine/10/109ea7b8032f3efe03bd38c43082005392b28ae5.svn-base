@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.clps.oas.sm.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.clps.oas.sm.pojo.Menu">
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_sort_id" jdbcType="INTEGER" property="menuSortId" />
+    <result column="menu_level" jdbcType="INTEGER" property="menuLevel" />
+    <result column="menu_parentid" jdbcType="INTEGER" property="menuParentid" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_isvariable" jdbcType="INTEGER" property="menuIsvariable" />
+    <result column="menu_comment" jdbcType="VARCHAR" property="menuComment" />
+    <result column="menu_created_datetime" jdbcType="TIMESTAMP" property="menuCreatedDatetime" />
+    <result column="menu_created_name" jdbcType="INTEGER" property="menuCreatedName" />
+    <result column="menu_updated_datetime" jdbcType="TIMESTAMP" property="menuUpdatedDatetime" />
+    <result column="menu_updated_name" jdbcType="INTEGER" property="menuUpdatedName" />
+    <result column="menu_default1" jdbcType="VARCHAR" property="menuDefault1" />
+    <result column="menu_default2" jdbcType="VARCHAR" property="menuDefault2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_name, menu_sort_id, menu_level, menu_parentid, menu_url, menu_isvariable, 
+    menu_comment, menu_created_datetime, menu_created_name, menu_updated_datetime, menu_updated_name, 
+    menu_default1, menu_default2
+  </sql>
+  
+  <!-- 查询所有菜单信息 -->
+  <select id="queryAllMenu"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_menu
+  </select>
+ 	
+ 	<!-- 通过id查询菜单信息 -->
+ 	<select id="queryMenuById"  resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_menu where menu_id=#{menuId}
+  </select>
+ 
+ 	<!--通过parentid查询菜单信息  -->
+  <select id="queryMenuByParentId"  resultMap="BaseResultMap" 
+ parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sm_menu where menu_parentid=#{menuId}
+  </select>
+ 
+ 	<!--查询同一级排序号是否相同  -->
+  <select id="queryMenuSortIdIsRepeat" resultType="java.lang.Integer" >
+    select 
+    count(*)
+    from sm_menu
+    where  menu_sort_id=#{menuSortId} and menu_level=#{menuLevel} and menu_parentid =#{menuParentId}
+  </select>
+ 
+ <!--查询url是否相同  -->
+  <select id="queryMenuUrlIsRepeat" parameterType="java.lang.String" 
+  resultType="java.lang.Integer" >
+    select 
+    count(*)
+    from sm_menu
+    where  menu_url=#{menuUrl} 
+  </select>
+ 
+  <!--查询同一级菜单名是否相同  -->
+ <select id="queryMenuNameIsRepeat" 
+  resultType="java.lang.Integer" >
+    select 
+    count(*)
+    from sm_menu
+    where  menu_name=#{menuName} and menu_level=#{menuLevel} and menu_parentid =#{menuParentId}
+  </select>
+ 
+ <!-- 条件查询 -->
+ <select id="queryMenuByCondition" resultMap="BaseResultMap">
+    select 
+  	<include refid="Base_Column_List" />
+    from sm_menu
+     <choose>
+        <when test="key!=null">
+         <choose>
+       		<when test="date!=0">
+        			 where  
+       			 	menu_name like  CONCAT(CONCAT('%', #{key}), '%')
+       			 	and menu_created_datetime between date_sub(now(), interval #{date} day) and now()
+        	</when>
+        	<otherwise>
+            		 where  
+       			 	menu_name like  CONCAT(CONCAT('%', #{key}), '%')
+        	</otherwise>
+   		 </choose>
+        </when>
+        <otherwise>
+           <choose>
+       		<when test="date!=0">
+        			 where  
+       			 	 
+       			 	 menu_created_datetime between date_sub(now(), interval #{date} day) and now()
+        	</when>
+        	<otherwise>
+            		
+        	</otherwise>
+   		 </choose>
+        </otherwise>
+    </choose>
+  </select>
+ 
+ <!-- 新增菜单 -->
+  <insert id="addMenu" parameterType="com.clps.oas.sm.pojo.Menu"  >
+    insert into sm_menu (menu_id, menu_name, menu_sort_id, 
+      menu_level, menu_parentid, menu_url, 
+      menu_isvariable, menu_comment, menu_created_datetime, 
+      menu_created_name, menu_updated_datetime, 
+      menu_updated_name, menu_default1, menu_default2
+      )
+    values (#{menuId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuSortId,jdbcType=INTEGER}, 
+      #{menuLevel,jdbcType=INTEGER}, #{menuParentid,jdbcType=INTEGER}, #{menuUrl,jdbcType=VARCHAR}, 
+      #{menuIsvariable,jdbcType=INTEGER}, #{menuComment,jdbcType=VARCHAR}, #{menuCreatedDatetime,jdbcType=TIMESTAMP}, 
+      #{menuCreatedName,jdbcType=INTEGER}, #{menuUpdatedDatetime,jdbcType=TIMESTAMP}, 
+      #{menuUpdatedName,jdbcType=INTEGER}, #{menuDefault1,jdbcType=VARCHAR}, #{menuDefault2,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <!-- 修改菜单 -->
+  <update id="updateMenu" parameterType="com.clps.oas.sm.pojo.Menu">
+    update sm_menu
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSortId != null">
+        menu_sort_id = #{menuSortId,jdbcType=INTEGER},
+      </if>
+      <if test="menuLevel != null">
+        menu_level = #{menuLevel,jdbcType=INTEGER},
+      </if>
+      <if test="menuParentid != null">
+        menu_parentid = #{menuParentid,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIsvariable != null">
+        menu_isvariable = #{menuIsvariable,jdbcType=INTEGER},
+      </if>
+      <if test="menuComment != null">
+        menu_comment = #{menuComment,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUpdatedDatetime != null">
+        menu_updated_datetime = #{menuUpdatedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuUpdatedName != null">
+        menu_updated_name = #{menuUpdatedName,jdbcType=INTEGER},
+      </if>
+      <if test="menuDefault1 != null">
+        menu_default1 = #{menuDefault1,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDefault2 != null">
+        menu_default2 = #{menuDefault2,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 修改菜单状态 -->
+ <update id="updateMenuState"  parameterType="com.clps.oas.sm.pojo.Menu">
+   <choose>
+        <when test="menuIsvariable==0">
+          update sm_menu
+   			 set menu_isvariable =1
+        </when>
+        <otherwise>
+             update sm_menu
+   			 set menu_isvariable =0
+        </otherwise>
+    </choose>
+     where menu_id = #{menuId,jdbcType=INTEGER}
+   </update> 
+   
+</mapper>

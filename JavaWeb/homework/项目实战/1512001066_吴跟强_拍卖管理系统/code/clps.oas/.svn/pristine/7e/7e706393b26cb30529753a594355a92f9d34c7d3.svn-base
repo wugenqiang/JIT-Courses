@@ -1,0 +1,177 @@
+package com.clps.oas.sm.pojo;
+
+import java.util.Date;
+
+import com.clps.oas.util.excel.ExcelAttribute;
+
+
+
+
+public class Position {
+	
+	@ExcelAttribute(name = "职位编号", column = "A")
+    private Integer positionId;
+
+	@ExcelAttribute(name = "职位名称", column = "B")
+    private String positionName;
+
+	@ExcelAttribute(name = "职位描述", column = "C")
+    private String positionDescription;
+
+	@ExcelAttribute(name = "职位等级", column = "D")
+    private String positionLevel;
+
+	@ExcelAttribute(name = "职位部门编号", column = "E")
+    private Integer positionDepartmentId;
+
+	@ExcelAttribute(name = "职位创建时间", column = "F")
+    private Date positionCreatedDatetime;
+
+	@ExcelAttribute(name = "职位创建人", column = "G")
+    private Integer positionCreatedName;
+
+	@ExcelAttribute(name = "职位修改时间", column = "H")
+    private Date positionUpdatedDatetime;
+
+	@ExcelAttribute(name = "职位修改人", column = "I")
+    private Integer positionUpdatedName;
+
+    private String positionDefault1;
+
+    private String positionDefault2;
+
+    private Integer positionIsvalued;
+
+	public Position() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Position(Integer positionId, String positionName, String positionDescription, String positionLevel,
+			Integer positionDepartmentId, Date positionCreatedDatetime, Integer positionCreatedName,
+			Date positionUpdatedDatetime, Integer positionUpdatedName, String positionDefault1, String positionDefault2,
+			Integer positionIsvalued) {
+		super();
+		this.positionId = positionId;
+		this.positionName = positionName;
+		this.positionDescription = positionDescription;
+		this.positionLevel = positionLevel;
+		this.positionDepartmentId = positionDepartmentId;
+		this.positionCreatedDatetime = positionCreatedDatetime;
+		this.positionCreatedName = positionCreatedName;
+		this.positionUpdatedDatetime = positionUpdatedDatetime;
+		this.positionUpdatedName = positionUpdatedName;
+		this.positionDefault1 = positionDefault1;
+		this.positionDefault2 = positionDefault2;
+		this.positionIsvalued = positionIsvalued;
+	}
+
+	public Integer getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(Integer positionId) {
+		this.positionId = positionId;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+	public String getPositionDescription() {
+		return positionDescription;
+	}
+
+	public void setPositionDescription(String positionDescription) {
+		this.positionDescription = positionDescription;
+	}
+
+	public String getPositionLevel() {
+		return positionLevel;
+	}
+
+	public void setPositionLevel(String positionLevel) {
+		this.positionLevel = positionLevel;
+	}
+
+	public Integer getPositionDepartmentId() {
+		return positionDepartmentId;
+	}
+
+	public void setPositionDepartmentId(Integer positionDepartmentId) {
+		this.positionDepartmentId = positionDepartmentId;
+	}
+
+	public Date getPositionCreatedDatetime() {
+		return positionCreatedDatetime;
+	}
+
+	public void setPositionCreatedDatetime(Date positionCreatedDatetime) {
+		this.positionCreatedDatetime = positionCreatedDatetime;
+	}
+
+	public Integer getPositionCreatedName() {
+		return positionCreatedName;
+	}
+
+	public void setPositionCreatedName(Integer positionCreatedName) {
+		this.positionCreatedName = positionCreatedName;
+	}
+
+	public Date getPositionUpdatedDatetime() {
+		return positionUpdatedDatetime;
+	}
+
+	public void setPositionUpdatedDatetime(Date positionUpdatedDatetime) {
+		this.positionUpdatedDatetime = positionUpdatedDatetime;
+	}
+
+	public Integer getPositionUpdatedName() {
+		return positionUpdatedName;
+	}
+
+	public void setPositionUpdatedName(Integer positionUpdatedName) {
+		this.positionUpdatedName = positionUpdatedName;
+	}
+
+	public String getPositionDefault1() {
+		return positionDefault1;
+	}
+
+	public void setPositionDefault1(String positionDefault1) {
+		this.positionDefault1 = positionDefault1;
+	}
+
+	public String getPositionDefault2() {
+		return positionDefault2;
+	}
+
+	public void setPositionDefault2(String positionDefault2) {
+		this.positionDefault2 = positionDefault2;
+	}
+
+	public Integer getPositionIsvalued() {
+		return positionIsvalued;
+	}
+
+	public void setPositionIsvalued(Integer positionIsvalued) {
+		this.positionIsvalued = positionIsvalued;
+	}
+
+	@Override
+	public String toString() {
+		return "Position [positionId=" + positionId + ", positionName=" + positionName + ", positionDescription="
+				+ positionDescription + ", positionLevel=" + positionLevel + ", positionDepartmentId="
+				+ positionDepartmentId + ", positionCreatedDatetime=" + positionCreatedDatetime
+				+ ", positionCreatedName=" + positionCreatedName + ", positionUpdatedDatetime="
+				+ positionUpdatedDatetime + ", positionUpdatedName=" + positionUpdatedName + ", positionDefault1="
+				+ positionDefault1 + ", positionDefault2=" + positionDefault2 + ", positionIsvalued=" + positionIsvalued
+				+ "]";
+	}
+
+    
+}
