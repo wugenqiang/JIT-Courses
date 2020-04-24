@@ -1,7 +1,23 @@
 # 课程攻略共享计划
 金陵科技学院课程攻略共享计划，欢迎贡献
 
+## 下载文件注意项
 
+当想下载单个文件查看时，可以进入相应的界面，如下图所示，如果提示下载就可以从这里下载
+
+![image-20200424103123091](https://gitee.com/wugenqiang/PictureBed/raw/master/CS-Notes/20200424103125.png)
+
+但是当你点击的时候会出现：
+
+![image-20200424103241526](https://gitee.com/wugenqiang/PictureBed/raw/master/CS-Notes/20200424103242.png)
+
+别慌！我们有办法：
+
+以 `https://raw.githubusercontent.com/wugenqiang/JIT-Courses/master/软件项目管理与案例分析/ppt课件/第10章.ppt` 这个路径为例，将 ``https://raw.githubusercontent.com/wugenqiang/JIT-Courses/master` 改为 `https://wugenqiang.github.io/JIT-Courses` 即可，看下图演示：
+
+![](https://gitee.com/wugenqiang/PictureBed/raw/master/CS-Notes/20200424103814.gif)
+
+好啦，尽情的畅游在知识的海洋里吧！
 
 ## 上传文件注意项
 
