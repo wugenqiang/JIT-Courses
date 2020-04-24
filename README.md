@@ -13,7 +13,7 @@
 
 别慌！我们有办法：
 
-以 `https://raw.githubusercontent.com/wugenqiang/JIT-Courses/master/软件项目管理与案例分析/ppt课件/第10章.ppt` 这个路径为例，将 ``https://raw.githubusercontent.com/wugenqiang/JIT-Courses/master` 改为 `https://wugenqiang.github.io/JIT-Courses` 即可，看下图演示：
+以 `https://raw.githubusercontent.com/wugenqiang/JIT-Courses/master/软件项目管理与案例分析/ppt课件/第10章.ppt` 这个路径为例，将 `https://raw.githubusercontent.com/wugenqiang/JIT-Courses/master` 改为 `https://wugenqiang.github.io/JIT-Courses` 即可，看下图演示：
 
 ![](https://gitee.com/wugenqiang/PictureBed/raw/master/CS-Notes/20200424103814.gif)
 
