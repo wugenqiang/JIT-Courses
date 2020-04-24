@@ -1,0 +1,4 @@
+#pi-blog .blogger-header {
+    background: url("/asset/module-blog/image/sea.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 260px;
+}

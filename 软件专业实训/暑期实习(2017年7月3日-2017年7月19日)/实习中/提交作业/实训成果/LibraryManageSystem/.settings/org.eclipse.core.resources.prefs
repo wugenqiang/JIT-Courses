@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebContent/sql=GBK
+encoding//WebContent/sql/book.sql=UTF-8
+encoding//WebContent/sql/user.sql=UTF-8
+encoding//src/com/wgq/controller/UserDataBaseController.java=GBK
+encoding//src/com/wgq/dao/BookDataBaseDao.java=GBK
+encoding//src/com/wgq/service/impl/BookDataBaseServiceImpl.java=GBK
+encoding//src/jdbc.properties=UTF-8
+encoding//src/log4j.properties=UTF-8
+encoding/<project>=UTF-8

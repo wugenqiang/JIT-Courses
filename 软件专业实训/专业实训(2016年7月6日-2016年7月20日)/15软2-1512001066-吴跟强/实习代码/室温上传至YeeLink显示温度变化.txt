@@ -1,0 +1,81 @@
+室温上传至YeeLink显示温度变化曲线：
+
+1、树莓派上编写程序:
+yeelink.py
+
+import serial,subprocess
+import time
+import requests,json
+ser=serial.Serial('/dev/ttyACM0',9600,timeout=1)
+ser.open()
+time.sleep(.9)
+try:
+   while 1:
+       res=ser.readline()
+       apiurl='http://api.yeelink.net/v1.0/device/349851/sensor/392288/datapoints'
+       apiheaders={'U-ApiKey':'3a93f93f1e40eabf4bcb76d1519a1b76','content-type':'application/json'}
+       res0=float(res)
+       res1={'value':res0}
+       r=requests.post(apiurl,headers=apiheaders,data=json.dumps(res1))
+       print res
+       time.sleep(.9)
+except KeyboardInterrupt:
+       ser.close()
+
+
+2、Arduino上烧写代码：
+
+#include <DallasTemperature.h> 
+DallasTemperature  tempSensor; 
+void setup(void)   
+{  
+       Serial.begin(9600);  
+       tempSensor.begin(12); 
+}  
+
+void loop(void)  
+{  
+        switch(tempSensor.isValid())   
+        {  
+             case 1:  
+                    Serial.println("Invalid CRC");  
+                    tempSensor.reset();          
+                    return;         
+             case 2:  
+                    Serial.println("Not a valid device");             
+                    tempSensor.reset();            
+                    return;      
+         }  
+        Serial.print(tempSensor.getTemperature()); 
+        Serial.print("C");   
+        Serial.println(); 
+} 
+
+或者烧写以下程序：
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#define ONE_WIRE_BUS 2
+ 
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+ 
+void setup(void)
+{
+     // 设置串口通信波特率
+     Serial.begin(9600);
+     Serial.println("Dallas Temperature IC Control Library Demo");
+ 
+     sensors.begin();
+}
+ 
+void loop(void)
+{ 
+     Serial.print("Requesting temperatures...");
+     sensors.requestTemperatures(); // 发送命令获取温度
+     Serial.println("DONE");
+   
+     Serial.print("Temperature for the device 1 (index 0) is: ");
+     Serial.println(sensors.getTempCByIndex(0));  
+}
+

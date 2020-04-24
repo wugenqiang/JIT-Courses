@@ -1,0 +1,127 @@
+¥∞ø⁄œ‘ æ “Œ¬:
+
+1°¢Arduino…œ…’–¥≥Ã–Ú£∫
+chuankou_wendu_arduino:
+
+#include <DallasTemperature.h>
+#include <OneWire.h>
+#define ONE_WIRE_BUS 12 
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+int temp;
+
+void setup()
+{
+     Serial.begin(9600);
+     pinMode(12, INPUT);
+}
+
+void loop() 
+{
+     sensors.requestTemperatures(); // ∑¢ÀÕ√¸¡ÓªÒ»°Œ¬∂»
+     Serial.println(sensors.getTempCByIndex(0));
+     delay(100);
+}
+
+
+2°¢ ˜›Æ≈……œ±‡–¥¥˙¬Î£∫
+wendu.py
+
+from PyQt4 import QtCore, QtGui
+import os
+import serial
+import time
+ser=serial.Serial('/dev/ttyACM0',9600,timeout=1)
+while 1:
+    try:
+        _fromUtf8 = QtCore.QString.fromUtf8
+    except AttributeError:
+        _fromUtf8 = lambda s: s
+    class Ui_HelloPyQt(object):
+        def setupUi(self, HelloPyQt):
+            HelloPyQt.setObjectName(_fromUtf8("HelloPyQt"))
+            HelloPyQt.resize(304, 212)
+            self.centralWidget = QtGui.QWidget(HelloPyQt)
+            self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
+            self.lcdTemp = QtGui.QLCDNumber(self.centralWidget)
+            self.lcdTemp.setGeometry(QtCore.QRect(40, 40, 221, 81))
+            self.lcdTemp.setSmallDecimalPoint(False)
+            self.lcdTemp.setDigitCount(6)
+            self.lcdTemp.setObjectName(_fromUtf8("lcdTemp"))
+            self.sliderAlarm = QtGui.QSlider(self.centralWidget)
+            self.sliderAlarm.setGeometry(QtCore.QRect(40, 170, 221, 16))
+            self.sliderAlarm.setMaximum(120)
+            self.sliderAlarm.setProperty("value", 80)
+            self.sliderAlarm.setOrientation(QtCore.Qt.Horizontal)
+            self.sliderAlarm.setTickPosition(QtGui.QSlider.NoTicks)
+            self.sliderAlarm.setObjectName(_fromUtf8("sliderAlarm"))
+            self.labelAlarm = QtGui.QLabel(self.centralWidget)
+            self.labelAlarm.setGeometry(QtCore.QRect(40, 150, 221, 16))
+            self.labelAlarm.setObjectName(_fromUtf8("labelAlarm"))
+            self.labelTemp = QtGui.QLabel(self.centralWidget)
+            self.labelTemp.setGeometry(QtCore.QRect(40, 20, 221, 16))
+            self.labelTemp.setObjectName(_fromUtf8("labelTemp"))
+       
+        #Add timer
+            self.timerTemp = QtCore.QTimer(self.centralWidget)       
+            HelloPyQt.setCentralWidget(self.centralWidget)       
+       
+        # Add slots
+            self.sliderAlarm.valueChanged.connect(self.sliderAlarm_ValueChanged)
+            self.timerTemp.timeout.connect(self.timerTemp_TimeOut)
+        # Use the timeout event to initialize the LCD
+            self.timerTemp_TimeOut()
+        # Start timer, time out per 2 seconds
+            self.timerTemp.start(2000)
+       
+       
+            self.retranslateUi(HelloPyQt)
+            QtCore.QMetaObject.connectSlotsByName(HelloPyQt)
+                                           
+ 
+        def retranslateUi(self, HelloPyQt):
+            HelloPyQt.setWindowTitle(QtGui.QApplication.translate("HelloPyQt", "HelloPyQt", None, QtGui.QApplication.UnicodeUTF8))
+            self.labelAlarm.setText(QtGui.QApplication.translate("HelloPyQt", "Alarm: 80C", None, QtGui.QApplication.UnicodeUTF8))
+            self.labelTemp.setText(QtGui.QApplication.translate("HelloPyQt", "Room Temperature", None, QtGui.QApplication.UnicodeUTF8))
+ 
+    # Event triggered when the value of labelAlarm changed
+        def sliderAlarm_ValueChanged(self):
+            self.labelAlarm.setText("Alarm: " + str(self.sliderAlarm.value()) + "C")
+       
+    # Event triggered when timerTemp time out
+        def timerTemp_TimeOut(self):
+        # Get temperature from sensor file
+            #sensor = os.popen("cat /sys/class/thermal/thermal_zone0/temp")
+            #sensor = ser.readline()
+            temp = float(ser.readline())
+            ser.flushInput()
+            #temp = float(sensor.readline())/1000
+            alarm = float(self.sliderAlarm.value())
+        # Display temperature
+            self.lcdTemp.display("%.1fC" % temp)
+         # Check whether the temperature is too high
+            if temp <= alarm * 0.6:
+                self.lcdTemp.setStyleSheet("color: green")
+            elif temp <= alarm * 0.8:
+                self.lcdTemp.setStyleSheet("color: orange")
+            elif temp <= alarm:
+                self.lcdTemp.setStyleSheet("color: red")
+            else:
+                self.lcdTemp.setStyleSheet("color: red")
+                msg = QtGui.QMessageBox()
+                msg.setWindowTitle("Alarm")
+                msg.setText("Temperature is too high!")
+                msg.setIcon(QtGui.QMessageBox.Warning)
+                msg.exec_()
+            # You can do something else here, like shut down the system
+           
+    if __name__ == "__main__":
+        import sys
+        app = QtGui.QApplication(sys.argv)
+        HelloPyQt = QtGui.QMainWindow()
+        ui = Ui_HelloPyQt()
+        ui.setupUi(HelloPyQt)
+        HelloPyQt.show()
+    sys.exit(app.exec_())
+

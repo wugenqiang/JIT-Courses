@@ -1,0 +1,12 @@
+int potpin=0;//定义光敏电阻模拟输入接口pin0
+int val;//定义变量
+void setup()
+{
+  Serial.begin(9600);//设置串口波特率为9600kbps
+}
+void loop()
+{
+ val=analogRead(potpin);//读取模拟接口的值
+ Serial.println(val);//输出模拟接口的值
+
+}

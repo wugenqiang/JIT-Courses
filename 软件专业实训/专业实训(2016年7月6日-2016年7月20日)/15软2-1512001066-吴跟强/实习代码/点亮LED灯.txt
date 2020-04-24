@@ -1,0 +1,16 @@
+点亮LED灯：
+
+int ledPin = 13;                //定义D13为LED正极口
+
+void setup()
+{
+     pinMode(ledPin, OUTPUT);   // 设定数字IO口的模式，OUTPUT 为输出
+}
+
+void loop() 
+{
+      digitalWrite(ledPin, HIGH); 
+      delay(1000);                
+      digitalWrite(ledPin, LOW); 
+      delay(1000);               
+}

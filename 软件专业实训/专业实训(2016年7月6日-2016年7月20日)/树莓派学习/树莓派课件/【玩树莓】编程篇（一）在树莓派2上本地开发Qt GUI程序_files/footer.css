@@ -1,0 +1,40 @@
+/* Footer */
+.pi-footer {
+    padding: 14px 0;
+    background-color: #f2f2f2;
+    line-height: 1.9;
+    min-width: 1139px;
+    font-size: 12px;
+}
+.pi-footer a {
+    padding: 0 5px;
+    color: #4d4d4d;
+}
+.pi-footer a:hover {
+    color: #165488;
+}
+.wb-icon {
+    margin: 0 3px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    background: url(../image/weibo-icon.png) no-repeat 0 0;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+.pi-footer-links {
+    padding-top: 10px;
+    padding-left: 0;
+    color: #333;
+}
+.pi-footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+
+@media (max-width: 1200px) {
+    .pi-footer {
+        min-width: 970px;
+    }
+}

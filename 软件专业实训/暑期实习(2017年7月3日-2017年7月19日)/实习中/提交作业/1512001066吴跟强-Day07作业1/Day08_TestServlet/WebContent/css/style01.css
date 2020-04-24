@@ -1,0 +1,51 @@
+/* header beign */
+.header {
+	
+}
+
+.container {
+	width: 100%;
+}
+
+.topTxt {
+	width: 100%;
+	background: #fafafa;
+	border-bottom: 1px #ededed solid;
+	height: auto;
+	text-align: right;
+	padding: 8px 0;
+}
+
+.topTxt a {
+	text-align: right;
+	padding: 0 3px;
+}
+
+.topArea {
+	height: auto;
+}
+
+.topArea .logo {
+	float: left;
+}
+
+.topArea .tel {
+	float: right;
+	margin-top: 15px;
+}
+
+.table {
+	table-layout: fixed;
+}
+
+.table td:hover {
+	overflow: visible;
+	white-space: normal;
+}
+
+.table td {
+	word-wrap: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

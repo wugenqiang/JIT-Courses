@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://www.eefocus.com/nightseas/blog/15-03/310769_b2d11.html -->
+<html lang="zh-cn"><style type="text/css" id="31154790733"></style><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/push.js"></script><script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5499aafcda37a38c5f0000b5.js"></script><script src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/cm.js" charset="utf-8"></script><script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/ga.js"></script><script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/sbhK2lTE.js"></script><script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/lidar.js"></script><script src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/id.php" charset="utf-8"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="wb:webmaster" content="e3d99d90e5fcc9c4">
+
+<title>【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序 - 电子懒兔 - 与非博客 - 与非网</title>
+
+<meta name="author" content="与非网,eefocus.com">
+<meta name="generator" content="与非网,eefocus.com">
+<meta name="keywords" content="嵌入式 创客 树莓派 Zynq">
+<meta name="description" content="写在前面：在这段一个人的生活中，想要静下来做点事情。翻来想去，不如读书、学习，借助手里的这两块树莓派，正好如愿。于是决定把自己的学习和体验记录下来，一来给自己留作日后的参考，同时也为自己关于使用开源硬件建立快速原型设计平台的构想储备些知识。====================================================================1.Qt Creator的安装及配置首先通过apt-get安装Qt Creator工具，同时会自动安装4.8版本的Qt-Lib库。$ ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/id-5" rel="stylesheet" type="text/css">
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/custom-front.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/toper.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/footer.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/sweetalert.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://www.eefocus.com/asset/theme-blogger/image/touch-icon-iphone.png?1465264313" rel="apple-touch-icon">
+<link href="http://www.eefocus.com/asset/theme-blogger/image/touch-icon-ipad.png?1465264312" rel="apple-touch-icon">
+<link href="http://www.eefocus.com/asset/theme-blogger/image/touch-icon-iphone-retina.png?1465264313" rel="apple-touch-icon">
+<link href="http://www.eefocus.com/asset/theme-blogger/image/touch-icon-ipad-retina.png?1465264312" rel="apple-touch-icon">
+<link href="http://www.eefocus.com/asset/custom/image/favicon.ico" rel="shortcut icon">
+
+
+<!--[if lt IE 9]><script type="text/javascript" src="http://static.semidata.info/www.eefocus.com/js/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script type="text/javascript" src="http://static.semidata.info/www.eefocus.com/js/respond.min.js"></script><![endif]-->
+<script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/sbhK2lTE.js"></script><script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/lidar.js"></script><script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/jquery.min.js"></script>
+<script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/bootstrap.min.js"></script>
+<!--[if lt IE 10]><script type="text/javascript" src="http://www.eefocus.com/asset/theme-blogger/js/jPlaceholder.js?1465264313"></script><![endif]-->
+<script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/sweetalert.min.js"></script>
+
+
+<style type="text/css">.api-qrcode-panel { position: fixed !important; top: 50% !important; right: 0 !important; margin-right: 0 !important; width: 130px !important; z-index: 2000 !important; font: 12px/1.5 'Microsoft yahei' !important; color: #666 !important; transition: all .3s ease-in-out !important; word-break: break-all !important; word-wrap: break-word !important; text-align: center !important; }.api-qrcode-panel.api-qrcode-panel-show { right: 0 !important; margin-right: 0 !important; }.api-qrcode-panel-inner { position: relative !important; right: -75% !important; transition: all .3s ease-in-out !important; padding: 7px 15px !important; background: #fff !important; }.api-qrcode-panel-inner.api-qrcode-panel-inner-show { right: 0 !important; }.api-qrcode-hd { text-align: left !important; padding: 0 6px !important; overflow: hidden !important; }.api-qrcode-close { float: right !important; cursor: pointer !important; font-size: 14px !important; line-height: 16px !important; font-weight: bold !important; }.api-qrcode-title {}.api-qrcode-bd {}.api-qrcode-img { display: block !important; margin: 0 !important; border: 0 !important; width: 100px !important; height: auto !important; }.api-qrcode-desc { padding: 0 6px !important; }@media (max-width: 480px) { .hidden-xxs { display: none !important; } }</style><script src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/m.js"></script><script type="text/javascript" async="" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/tagjs"></script><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/saved_resource" width="1" height="1" border="0"><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/seg" width="1" height="1" border="0"><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/seg(1)" width="1" height="1" border="0"></head>
+<body id="pi-blog" class="pi-locale-zh-cn"><link href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/jiathis_utility.html" style="display: none;"></iframe>
+
+    
+    <!-- Top bar: include eehub entrance -->
+    <!-- Entrance -->
+<div class="navbar-header-ef">
+    <div class="container">
+        <div class="entrance-brand" style="width:180px;">
+            <a href="http://www.eehub.cn/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=eehub&utm_term=eehub" class="entrance-main-title" target="_blank">电子信息港</a>
+            -
+            <a href="http://www.eefocus.com/" class="entrance-sub-title">与非网
+                <img alt="" width="9" height="5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKCAYAAAC5Sw6hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTFDODNDMUVGMTQ5MTFFM0E1OTc5QTQ1MkFBNzBCNDUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTFDODNDMUZGMTQ5MTFFM0E1OTc5QTQ1MkFBNzBCNDUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMUM4M0MxQ0YxNDkxMUUzQTU5NzlBNDUyQUE3MEI0NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMUM4M0MxREYxNDkxMUUzQTU5NzlBNDUyQUE3MEI0NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkDZohUAAADOSURBVHjalNE7CsJAFIXhGAa0y1p0A77wgUJsNJWVYOUS7NyAnSAoiKioC/ABQhoLwUIrIY1r8Q/cQAiJSQY+wmTOHIaZzMMoaIw95rC19KOKgS6TFY5opixx8wesvaILLOxgJizpYIserrpvwZaSBboxJZbkTO86VCBwRxsn5LAJKeljihae3k8VEnQX6zgji6VvbYgJanj7N6mIo79QwU3KZhhhLK/0CW5Qf+7BDZelrIG8zJ2wsB5zqe6mIgz5OlFBleCZvyjFhX4CDAApPCL1WG/jIAAAAABJRU5ErkJggg==">
+            </a>
+
+			<div class="nav-modules-container"><ul class="nav-modules"><li class="nav-module"><a href="http://www.eefocus.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=eefocus&utm_term=eefocus" class="nav-module-link" title="看行业资讯，观技术交流" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px 0px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="看行业资讯，观技术交流">与非网</div><div class="nav-module-domain">eefocus.com</div></div></a></li><li class="nav-module"><a href="http://www.cirmall.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=cirmall&utm_termcirmall" class="nav-module-link" title="看别人设计、晒自己方案" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -140px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="看别人设计、晒自己方案">电路城</div><div class="nav-module-domain">cirmall.com</div></div></a></li><li class="nav-module"><a href="http://www.cndzz.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=cndzz&utm_term=cndzz" class="nav-module-link" title="汇百家电路、集万件文档" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -70px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="汇百家电路、集万件文档">电路网</div><div class="nav-module-domain">cndzz.com</div></div></a></li><li class="nav-module"><a href="http://url.eefocus.com/xz" class="nav-module-link" title="找器件货源、比供应报价" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -210px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="找器件货源、比供应报价">芯情报</div><div class="nav-module-domain">findchips.com</div></div></a></li><li class="nav-module"><a href="http://www.datasheet5.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=datasheet5&utm_term=datasheet5" class="nav-module-link" title="查器件信息，下数据手册" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -280px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="查器件信息，下数据手册">元件库</div><div class="nav-module-domain">datasheet5.com</div></div></a></li><li class="nav-module"><a href="http://www.eeboard.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=eeboard&utm_term=eeboard" class="nav-module-link" title="评最新板卡、拆热门产品" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -350px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="评最新板卡、拆热门产品">爱板网</div><div class="nav-module-domain">eeboard.com</div></div></a></li><li class="nav-module"><a href="http://www.moore8.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=moore8&utm_term=moore8" class="nav-module-link" title="做行业名师、学专业技能" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -420px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="做行业名师、学专业技能">摩尔吧</div><div class="nav-module-domain">moore8.com</div></div></a></li><li class="nav-module"><a href="http://www.znczz.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=znczz&utm_term=znczz" class="nav-module-link" title="玩尖端科技、练团队实战" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -560px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="玩尖端科技、练团队实战">智能车</div><div class="nav-module-domain">znczz.com</div></div></a></li><li class="nav-module"><a href="http://www.eehub.cn/?utm_campaign=dianzixinxigang&amp;utm_medium=navi&amp;utm_source=eefocus&amp;utm_content=eehub&amp;utm_term=eehub" class="nav-module-link" title="" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -630px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="">首页</div><div class="nav-module-domain">eehub.cn</div></div></a></li><li class="nav-module"><a href="http://www.bom2buy.com/?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=eda&utm_term=bom2buy" class="nav-module-link" title="比供应报价，推荐最优方案" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -1610px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="比供应报价，推荐最优方案">BOM估价</div><div class="nav-module-domain">bom2buy.com</div></div></a></li><li class="nav-module"><a href="http://www.moore8.com/yl/home?utm_campaign=dianzixinxigang&utm_medium=navi&utm_source=eefocus&utm_content=eda&utm_term=yinglai" class="nav-module-link" title="电子行业线下活动汇聚地" target="_blank"><div class="nav-module-icon" style="background:url(&#39;http://www.eehub.cn/icons/icons_bg.png?v1&#39;) 0px -1750px no-repeat;"></div><div class="nav-module-title"><div class="nav-module-name" title="电子行业线下活动汇聚地">硬来</div><div class="nav-module-domain">yinglai</div></div></a></li><li class="nav-module"><a href="http://www.eehub.cn/?site=default#/navigation/customize" style="display:block;border: 1px dashed #D0D0D0;margin: 10px 20px;padding: 25px 20px;cursor:pointer"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0QjIyNTQwNzE1NTIxMUU0QTkxNkE5MDBFRkQwMDU1OCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0QjIyNTQwODE1NTIxMUU0QTkxNkE5MDBFRkQwMDU1OCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjRCMjI1NDA1MTU1MjExRTRBOTE2QTkwMEVGRDAwNTU4IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjRCMjI1NDA2MTU1MjExRTRBOTE2QTkwMEVGRDAwNTU4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+WT296QAAAPRJREFUeNpi/P//PwOxoKKhZw6QkoJyn3U0lKQwkABYSFEMdJYMEleGgURAkmUMJIQC5T6jq2UMDHS07N/wDcb/QycYGUFBU1DZCrKUgwj1a9D4IUTo+TGhvfoP3GdAFy8BUgJkOHYNEWo+AHEEwrL//wUYaAcEUOLs3///DPQAYMsUZKV43rz78JOQ4s+fv/xG5vPy8rAS0iMmIsSBkkCA4ApSaY4TZBXXn0LmT+ttNCPCQ4+BWB856esQmfR3oAkJDY8S5N/wrWJGLRtyljEMpTYIEymKZaUluUBBCcIgNlmVJwngBhCrQNl3gFiDFM0AAQYApRFoJ41o9WsAAAAASUVORK5CYII="></a></li></ul></div>
+        </div><div style="display: none;" id="entrance-mobile" class="entrance-mobile">             <div style="max-height: 44px; cursor: pointer;" class="entrance-sub-title">               <img class="phone-icon" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/mobile-icon.png">               <span class="copywriting">移动客户端</span>               <img alt="" width="9" height="5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKCAYAAAC5Sw6hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTFDODNDMUVGMTQ5MTFFM0E1OTc5QTQ1MkFBNzBCNDUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTFDODNDMUZGMTQ5MTFFM0E1OTc5QTQ1MkFBNzBCNDUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxMUM4M0MxQ0YxNDkxMUUzQTU5NzlBNDUyQUE3MEI0NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxMUM4M0MxREYxNDkxMUUzQTU5NzlBNDUyQUE3MEI0NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkDZohUAAADOSURBVHjalNE7CsJAFIXhGAa0y1p0A77wgUJsNJWVYOUS7NyAnSAoiKioC/ABQhoLwUIrIY1r8Q/cQAiJSQY+wmTOHIaZzMMoaIw95rC19KOKgS6TFY5opixx8wesvaILLOxgJizpYIserrpvwZaSBboxJZbkTO86VCBwRxsn5LAJKeljihae3k8VEnQX6zgji6VvbYgJanj7N6mIo79QwU3KZhhhLK/0CW5Qf+7BDZelrIG8zJ2wsB5zqe6mIgz5OlFBleCZvyjFhX4CDAApPCL1WG/jIAAAAABJRU5ErkJggg==">             </div>             <div class="nav-mobile-modules-container">                 <div class="modules-body"> 										<div class="modules-one border-one"> 											<a href="http://www.moore8.com/yinglai" target="_blank"> 												<div class="app-modules"> 													<div class="app-yinglai"></div> 													<div class="modules-info"> 														<div class="info-title">硬来</div> 														<div class="info-title-ins">最全电子活动专属app</div> 													</div> 												</div> 											</a> 											<div class="yinglai-app-codes"> 												<div style="clear:both; text-align:center; padding:0; margin:0;"> 												<img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/yinglai-app.png" style="width:84px; height:85px; margin-right:10px;"> 												</div> 												<div class="code-ios"> 													<a href="https://itunes.apple.com/cn/app/ying-lai/id999704525?mt=8" target="_blank"> 														<div class="down-ios-link"></div> 													</a> 												</div> 												<div class="code-andr"> 													<a href="http://www.eefocus.com/data/mobile/download/app-release.apk" target="_blank"> 														<div class="down-andr-link"></div> 													</a> 												</div> 											</div> 										</div>                     <div class="modules-one border-one">                       <a href="http://www.eefocus.com/hardware-assistant" target="_blank">                         <div class="app-modules">                             <div class="app-helper"></div>                             <div class="modules-info">                                 <div class="info-title">硬件助手</div>                                 <div class="info-title-ins">电子工程师的必备APP</div>                             </div>                         </div>                       </a>                         <div class="helper-app-codes"> 														<div style="clear:both; text-align:center; padding:0; margin:0;"> 														<img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/helper-common.png" style="width:84px; height:85px; margin-right:10px;"> 														</div>                             <div class="code-ios">                                 <a href="https://itunes.apple.com/cn/app/ying-jian-zhu-shou/id773044976?mt=8" target="_blank">                                     <div class="down-ios-link"></div>                                 </a>                             </div>                             <div class="code-andr">                                 <a href="http://www.eefocus.com/data/mobile/download/HardwareAssistant.apk" target="_blank">                                     <div class="down-andr-link"></div>                                 </a>                             </div>                         </div>                     </div>                     <div class="modules-one border-one">                         <div class="app-modules">                             <div class="app-buyer"></div>                             <div class="modules-info">                                 <div class="info-title">买芯片</div>                                 <div class="info-title-ins">40家分销商实时数据查询</div>                             </div>                         </div>                         <div class="buyer-app-codes">                             <div class="code-ios">                                 <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/buyer-app.png">                                 <a href="https://itunes.apple.com/cn/app/mai-xin-pian/id910377165?mt=8" target="_blank">                                     <div class="down-ios-link"></div>                                 </a>                             </div>                             <div class="code-andr">                                 <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/buyer-android.png">                                 <a href="http://www.eefocus.com/data/mobile/download/findchips.apk" target="_blank">                                     <div class="down-andr-link"></div>                                 </a>                             </div>                         </div>                     </div>                     <div class="modules-one">                         <div class="app-modules">                             <div class="app-moore8"></div>                             <div class="modules-info">                                 <div class="info-title">摩尔吧</div>                                 <div class="info-title-ins">在线视频教程应用</div>                             </div>                         </div>                         <div style="text-align: center;" class="moore8-app-codes">                             <div class="code-ios">                                 <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/moore8-app.png">                                 <a href="https://itunes.apple.com/cn/app/ee-shi-pin-jiao-cheng/id791071885?mt=8" target="_blank">                                     <div class="down-ios-link"></div>                                 </a>                             </div>                         </div>                     </div>                 </div>             </div>             <link rel="stylesheet" href="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/entrance-mobile.css">         </div>
+        <!-- Userbar -->
+        <div class="login-in-box">
+            <ul class="nav navbar-nav navbar-right" id="user-bar-anonymous" style="">
+    <li>
+        <a href="http://www.eefocus.com/saml/index/login/?redirect=http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html">
+            登录        </a>
+    </li>
+    <li>
+        <a href="http://account.eefocus.com/user/register?app=pi250d&redirect=http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html">
+            注册        </a>
+    </li>
+</ul>
+<ul class="nav navbar-nav navbar-right" id="user-bar-member" style="display: none;">
+    <li>
+        <a id="member-profile" href="http://www.eefocus.com/nightseas/blog/15-03/310769_b2d11.html#" title="资料">
+            资料        </a>
+    </li>
+    <li>
+         <a id="member-message" href="http://www.eefocus.com/nightseas/blog/15-03/310769_b2d11.html#" title="私信">
+            私信        </a>
+    </li>
+    <li>
+        <a id="member-logout" href="http://www.eefocus.com/saml/index/logout/?redirect=http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html">
+            退出        </a>
+    </li>
+</ul>
+<script>
+    $(function(){
+        $.getJSON("http://www.eefocus.com/system/index/user/?" + new Date().getTime(), function (user) {
+            var ela = $('#user-bar-anonymous');
+            var elm = $('#user-bar-member');
+
+            if (user.uid > 0) {
+                ela.hide();
+                elm.show();
+                $('#member-message').attr('href', user.message);
+                $('#member-profile').attr('href', user.profile).html(user.avatar + ' ' + user.name);
+
+                /*show message number*/
+                $.ajax({
+                  type: "GET",
+                  url: "http://account.eefocus.com/message/index/count",
+                  dataType: "jsonp",
+                  success:function(data){
+                      if (data.status == 1 && data.data > 0){
+                          var newText = $('#member-message').html() + '('+data.data+')';
+                          $('#member-message').html(newText);
+                      }
+                  }
+                });
+            } else {
+                ela.show();
+                elm.hide();
+            }
+
+            if ($('.nav-modules-container').length) {
+                var new_script = document.createElement('script');
+                new_script.src = 'http://www.eehub.cn/api/v1/js/navigation-modules?source=eefocus&userId=' + user.uid;
+                $('.nav-modules-container').eq(0).after(new_script);
+            }
+        });
+    })
+</script>
+        </div>
+        
+
+        <!-- Search -->
+        <form id="form1" action="http://search.eefocus.com/s" name="form1" class="entrance-search">
+            <input style="overflow: hidden; text-indent: -9999em;" class="ser-img" type="submit" name="sub" value="1">
+            <input id="Text2" class="ser_input entrance-ser-input" type="text" gtbfieldid="2" autocomplete="off" name="q" value="" maxlength="100" placeholder="请输关键词">
+        </form>
+
+        <a class="bom2buy-text" href="http://www.bom2buy.com/" target="_blank" style="color:#4c4c4c;float:right;line-height:47px;margin-right:20px;">多型号芯片价格查询一键搞定</a>
+
+
+		<div class="blog-homepage" style="height: 20px;left: 170px;position: relative;top: -30px;width: 200px;">
+			&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.eefocus.com/blog" style="color:#b30322" title="博客首页">博客首页</a>
+		</div>
+    </div>
+</div>
+
+    <!-- Generated by OpenX 2.8.7 -->
+    <script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/spcjs.php"></script><script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/spc.php"></script><script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/fl.js"></script>
+
+    <script type="text/javascript">
+        org.openx.SWFObject.prototype.addParam=function () {
+            this.params[arguments[0]]=arguments[1];
+                    if(!this.params['wmode']){
+                        this.params['wmode']="transparent";
+                    }
+        }
+    </script>
+
+    <!-- Page main content: breadcrumb, flash-messenger, blocks and module content -->
+        <div class="container pi-main-container">
+     <!-- Flash messenger -->
+                <!-- Top head zone -->
+                <div class="pi-zone-0 clearfix">
+            <div class="panel panel-default blog-blogger header">
+    <div class="panel-body"><div class="blogger-header">
+	<div class="blogger-description">
+		<h2 class="pi-ellipsis pi-ellipsis-1">电子懒兔</h2>
+		<p class="pi-ellipsis pi-ellipsis-2">一只搞电子的懒兔子……
+&lt;GitHub&gt; https://github.com/nightseas</p>
+	</div>
+	<div class="blogger-qlink pull-right">
+		<a class="btn active" title="博文目录" href="http://www.eefocus.com/nightseas/blog">
+			博文目录		</a>
+		<a class="btn" target="_blank" title="关于作者" href="http://account.eefocus.com/user/profile/293751">
+			关于作者		</a>
+		<a class="btn link-blog-manage hide-owner-dom hide" title="博客管理" href="http://www.eefocus.com/blog/myspace/">
+			博客管理		</a>
+		<a class="btn link-my-blog" title="我的博客" href="http://www.eefocus.com/blog/homepage/my/"><i></i></a>
+	</div>
+</div></div></div>
+        </div>
+        
+        <div class="row">
+        			
+            <div class="pi-zone-wrap pi-zone-wrap-bg">
+				<div class="col-xs-3">
+											<div class="pi-zone-1">
+							<div class="panel panel-default blog-blogger box">
+    <div class="panel-body"><div class="blogger-info">
+	<a title="电子懒兔" href="http://www.eefocus.com/nightseas/blog">
+		<img class="img-circle" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/bc801fb26e07b87a80035fc9ce5938ef.jpg">
+	</a>
+	<h2 class="pi-ellipsis pi-ellipsis-1">懒兔子</h2>
+	<div class="compose-blog hide-owner-dom hide">
+		<a title="发布博客" href="http://www.eefocus.com/blog/myspace/?act=add" class="btn btn-primary">发布博客</a>
+	</div>
+	<div class="action-group blog-link-color show-owner-dom">
+		<a title="发送消息" target="_blank" href="http://account.eefocus.com/message/index/send/uid-293751"><i class="fa fa-comment"></i>发送消息</a> |
+		<a class="add-friend" title="添加朋友" href="javascript:void(0)"><i class="fa fa-user"></i>添加朋友</a>
+	</div>
+</div></div></div>
+<div class="panel panel-default blog-category list">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">博客分类</div>
+                    </div><div class="panel-body"><ul class="pi-blog-category-list">
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="所有" href="http://www.eefocus.com/nightseas/blog">所有					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="STM32" href="http://www.eefocus.com/nightseas/blog/cate_8417_0.html">STM32						<span class="text-muted"> ( 0 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="MSP430" href="http://www.eefocus.com/nightseas/blog/cate_8418_0.html">MSP430						<span class="text-muted"> ( 8 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="VB.NET" href="http://www.eefocus.com/nightseas/blog/cate_8420_0.html">VB.NET						<span class="text-muted"> ( 1 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="乱七八糟" href="http://www.eefocus.com/nightseas/blog/cate_8789_0.html">乱七八糟						<span class="text-muted"> ( 4 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="技术文摘" href="http://www.eefocus.com/nightseas/blog/cate_8790_0.html">技术文摘						<span class="text-muted"> ( 1 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="CPLD/FPGA" href="http://www.eefocus.com/nightseas/blog/cate_10893_0.html">CPLD/FPGA						<span class="text-muted"> ( 4 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="应用技术" href="http://www.eefocus.com/nightseas/blog/cate_12126_0.html">应用技术						<span class="text-muted"> ( 5 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="智能家庭健康平台/ZedBoard" href="http://www.eefocus.com/nightseas/blog/cate_12977_0.html">智能家庭健康平台/ZedBoard						<span class="text-muted"> ( 15 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="RaspberryPi" href="http://www.eefocus.com/nightseas/blog/cate_13944_0.html">RaspberryPi						<span class="text-muted"> ( 16 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="OSHW" href="http://www.eefocus.com/nightseas/blog/cate_17634_0.html">OSHW						<span class="text-muted"> ( 4 )</span>
+					</a>
+
+			</li>
+				<li>
+		<a class="pi-ellipsis pi-ellipsis-1" title="Linux" href="http://www.eefocus.com/nightseas/blog/cate_406026_0.html">Linux						<span class="text-muted"> ( 0 )</span>
+					</a>
+
+			</li>
+	</ul></div></div>
+						</div>
+																<div class="pi-zone-2">
+							<div class="panel panel-default micro-blog">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">兔子微博</div>
+                    </div><div class="panel-body"><div class="micro-blog">
+	<iframe width="100%" height="420" class="share_self" frameborder="0" scrolling="no" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/WeiboShow.html"></iframe></div></div></div>
+						</div>
+																<div class="pi-zone-3">
+							<div class="panel panel-default blog-newest-article">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">最新博文</div>
+                    </div><div class="panel-body">
+<div class="blog-common-list">
+        <ul>
+                <li>
+            <a href="http://www.eefocus.com/z184244072/blog/16-06/385516_5db6b.html" title="线路板PCB覆铜经验之我谈" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 线路板PCB覆铜经验之我谈            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/wallice/blog/16-06/385515_382c6.html" title="弹簧针连接器 - pogo pin 手机连接器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 弹簧针连接器 - pogo pin 手机连接器            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/fjjqm2012/blog/16-06/385514_b9925.html" title="中广电获牌 暗自发力突围电信圈" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 中广电获牌 暗自发力突围电信圈            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/ayayayaya/blog/16-06/385513_38ef0.html" title="神奇星创客训练营 致小伙弃税后10K工作来学习" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 神奇星创客训练营 致小伙弃税后10K工作来学习            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/iispyanan/blog/16-06/385512_4b697.html" title="微信朋友圈推广，如何多加好友？" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 微信朋友圈推广，如何多加好友？            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/ayayayaya/blog/16-06/385511_fd86d.html" title="华清远见济南中心-山财大Android培训营圆满收官" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 华清远见济南中心-山财大Android培训营圆满收官            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/ayayayaya/blog/16-06/385510_69218.html" title="嵌入式、安卓培训到大机构济南华清远见有三保障" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 嵌入式、安卓培训到大机构济南华清远见有三保障            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/jiangteng/blog/16-06/385509_094bc.html" title="无线串口模块sx1212" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 无线串口模块sx1212            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/turase/blog/16-06/385508_8fca6.html" title="LED新蓝海领域推荐" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 LED新蓝海领域推荐            </a>
+        </li>
+                <li>
+            <a href="http://www.eefocus.com/jztsoft16264558/blog/16-06/385507_a5eac.html" title="National Instruments NI-IMAQ for IEEE 1394\" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                 National Instruments NI-IMAQ for IEEE 1394\            </a>
+        </li>
+            </ul>
+    </div>
+</div></div>
+<div class="panel panel-default widget-blog-left-300-250">
+    <div class="panel-body"><style type="text/css">
+.widget-blog-left-300-250 {margin-top: 20px;margin-bottom:20px;}
+.widget-blog-left-300-250 img {max-width: 100%; height: auto;}</style>
+<script type="text/javascript"><!--// <![CDATA[
+    /* [id436] 与非网主站 -博客左侧（300x250） */
+    OA_show(436);
+// ]]> --></script><script language="JavaScript1.1" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/ck.php">
+</script><div class="GoogleActiveViewClass" id="DfaVisibilityIdentifier_3179236060"><a target="_blank" href="https://adclick.g.doubleclick.net/pcs/click?xai=AKAOjssXymvilayx6sVg1gjqA9mMJlT6zBBYV0NKPS_kw-uK7d579oo1GOgiSxiZz0_9tEsKqO4UD9KLdmViHy5jR__mSLZokye4UWELTvc8yndnmYfUQFEOcY4&sig=Cg0ArKJSzKoDu-R3T3Zv&urlfix=1&adurl=http://gg.eefocus.com/www/delivery/ck.php%3Foaparams%3D2__bannerid%3D8493__zoneid%3D436__cb%3Da9087232fe__oadest%3Dhttp%253A%252F%252Fanalytics.supplyframe.cn%252Ftrackingservlet%252Ftrack%252F%253Faction%253DadClick_eefocus%2526value2%253D8493%2526value3%253D227%2526zone%253D436%2526extra%253Dh_crc%253D2625360942%257Csrv%253Dvm-gg-2%257Cox_v%253D2.8%257Ch_value%253D56e302fa42679a841466152867%257Cgeo%253DCN%2526zone%253D436%2526url%253Dhttps://led-driver.power.com/zh-hans/products/lytswitch-family/lytswitch-5/%3FAdsource%3DAdcn_Eefocus_300x250_LYT5"><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/PI-LYTSwitch-5-300x250-Jan-16-CH-merge.gif" alt="Advertisement" border="0" width="300" height="250"></a></div>
+<noscript>
+&lt;a href="http://gg.eefocus.com/www/delivery/ck.php?oaparams=2__bannerid=8493__zoneid=436__cb=a9087232fe__oadest=http%3A%2F%2Fanalytics.supplyframe.cn%2Ftrackingservlet%2Ftrack%2F%3Faction%3DadClick_eefocus%26value2%3D8493%26value3%3D227%26zone%3D436%26extra%3Dh_crc%3D2625360942%7Csrv%3Dvm-gg-2%7Cox_v%3D2.8%7Ch_value%3D56e302fa42679a841466152867%7Cgeo%3DCN%26zone%3D436%26url%3Dhttps%3A%2F%2Fad.doubleclick.net%2Fddm%2Fjump%2FN7384.137795EEFOCUS.COM%2FB9326344.127961571%3Bsz%3D300x250%3Bord%3D%5Btimestamp%5D%3F" target="_blank"&gt;
+&lt;IMG SRC="https://ad.doubleclick.net/ddm/ad/N7384.137795EEFOCUS.COM/B9326344.127961571;sz=300x250;ord=a9087232fe;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?" BORDER=0 WIDTH=300 HEIGHT=250 ALT="Advertisement"&gt;&lt;/A&gt;
+</noscript><div id="beacon_a9087232fe" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/lg.php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/saved_resource(1)" width="0" height="0" alt="" style="display:none">
+<noscript>&lt;a target='_blank' href='http://gg.eefocus.com/www/delivery/ck.php?n=3c2e4ce'&gt;&lt;img border='0' alt='' src='http://gg.eefocus.com/www/delivery/avw.php?zoneid=436&amp;amp;n=3c2e4ce' /&gt;&lt;/a&gt;</noscript></div></div>
+<div class="panel panel-default widget-maxim">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">Maxim专区</div>
+                    </div><div class="panel-body"><div class="widget-list widget-list-common">
+    <ul>
+                <li>
+            <a href="http://url.eefocus.com/4e9?text" title="失调和漂移完全测不到，这款运放究竟怎么做到" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                失调和漂移完全测不到，这款运放究竟怎么做到            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4ea?text" title="自带RTD故障检测，别人家的输出转换器都弱爆了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                自带RTD故障检测，别人家的输出转换器都弱爆了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4eb?text" title="真正的失效保护接收器，敢于直面±15kV的刺激" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                真正的失效保护接收器，敢于直面±15kV的刺激            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4ec?text" title="用它做了热电偶，老婆再也不担心我加班了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                用它做了热电偶，老婆再也不担心我加班了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4ed?text" title="自带±80V故障保护，这样的收发器不断货才怪" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                自带±80V故障保护，这样的收发器不断货才怪            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4h3?text" title="MAX3051：+3.3V、1Mbps低电源电流CAN收发器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX3051：+3.3V、1Mbps低电源电流CAN收发器            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4h4?text" title="MAX11270：同类功耗最低、SNR最高的模数转换器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX11270：同类功耗最低、SNR最高的模数转换器            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4fa?text" title="MAX44260：低失调、低功耗、满摆幅I/O运算放大器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX44260：低失调、低功耗、满摆幅I/O运算放大器            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4fb?text" title="DS3231M：低成本、高精度I²C实时时钟" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                DS3231M：低成本、高精度I²C实时时钟            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4fc?text" title="MAX1300：多量程、低功耗逐次逼近型模数转换器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX1300：多量程、低功耗逐次逼近型模数转换器            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4fd?text" title="MAX15023：内置自举二极管，双通道降压控制器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX15023：内置自举二极管，双通道降压控制器            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4gd?text" title="MAX14780E：500kbps的无差错数据传输的收发器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX14780E：500kbps的无差错数据传输的收发器            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4ge?text" title="MAX6070：低噪声、高精度系列电压基准" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX6070：低噪声、高精度系列电压基准            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4gf?text" title="MAX15026：低成本、小尺寸的同步降压控制器" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                MAX15026：低成本、小尺寸的同步降压控制器            </a>
+        </li>
+            </ul>
+</div>
+</div></div>
+<div class="panel panel-default widget-mouser">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">Mouser专区</div>
+                    </div><div class="panel-body"><div class="widget-list widget-list-common">
+    <ul>
+                <li>
+            <a href="http://url.eefocus.com/41p?text" title="智能电表的核心技术一一解析" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                智能电表的核心技术一一解析            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41q?text" title="无线充电解决方案选择有啥难" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                无线充电解决方案选择有啥难            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41r?text" title="都是干货，新能源核心技术详解及器件选型大全" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                都是干货，新能源核心技术详解及器件选型大全            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41s?text" title="没有这些器件和技术，机器人只是一堆烂铁皮" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                没有这些器件和技术，机器人只是一堆烂铁皮            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41t?text" title="LED照明技术还能玩出什么新花样？" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                LED照明技术还能玩出什么新花样？            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41u?text" title="据说，这些智能医疗产品都很赚钱" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                据说，这些智能医疗产品都很赚钱            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41v?text" title="不掌握这些最新信息，还怎么在科技圈混" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                不掌握这些最新信息，还怎么在科技圈混            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/413?text" title="小批量元器件订购最快的出货速度，你猜" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                小批量元器件订购最快的出货速度，你猜            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/414?text" title="分立元件、光电子、传感器、嵌入式、电路保护……要啥有啥" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                分立元件、光电子、传感器、嵌入式、电路保护……要啥有啥            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/415?text" title="最全的无源元件选型指南" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                最全的无源元件选型指南            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/416?text" title="电线电缆我们就要最新的" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                电线电缆我们就要最新的            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/417?text" title="电路保护很重要，选择怎样的器件才靠谱？" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                电路保护很重要，选择怎样的器件才靠谱？            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/419?text" title="为系统搭建一条完整的信号链，用这个就够了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                为系统搭建一条完整的信号链，用这个就够了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41a?text" title="系统搭建好了，下一步，你还需要这样的配件" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                系统搭建好了，下一步，你还需要这样的配件            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41b?text" title="产品大卖1个亿原来是因为它" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                产品大卖1个亿原来是因为它            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41c?text" title="光电器件怎么选？此处有秘籍" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                光电器件怎么选？此处有秘籍            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41d?text" title="这年头，没有一款像样的传感器，产品还怎么赚钱" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                这年头，没有一款像样的传感器，产品还怎么赚钱            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41e?text" title="别看连接器事小，选不好可是会出大问题" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                别看连接器事小，选不好可是会出大问题            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41f?text" title="有了这些测试仪器，还愁系统测试找不出问题？" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                有了这些测试仪器，还愁系统测试找不出问题？            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41g?text" title="Hi 哥们，你产品的散热问题解决了吗" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                Hi 哥们，你产品的散热问题解决了吗            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41h?text" title="有了这些模块产品，系统设计竟然跟搭积木一样简单" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                有了这些模块产品，系统设计竟然跟搭积木一样简单            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41j?text" title="要跟上开发工具的技术更新？请把它收藏" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                要跟上开发工具的技术更新？请把它收藏            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41k?text" title="工程师想要技术不落伍怎么办？" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                工程师想要技术不落伍怎么办？            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41l?text" title="据说，工业界正有这些技术大势在发生" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                据说，工业界正有这些技术大势在发生            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41m?text" title="原来有这么经典的视频监控解决方案（视频）" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                原来有这么经典的视频监控解决方案（视频）            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41n?text" title="现如今做汽车电子据说这些产品很赚钱" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                现如今做汽车电子据说这些产品很赚钱            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41o?text" title="说物联网太虚，做这些产品才脚踏实地" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                说物联网太虚，做这些产品才脚踏实地            </a>
+        </li>
+            </ul>
+</div>
+</div></div>
+<div class="panel panel-default widget-taike">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">泰克专区</div>
+                    </div><div class="panel-body"><div class="widget-list widget-list-common">
+    <ul>
+                <li>
+            <a href="http://url.eefocus.com/40o?eefocustext" title="大家都说，和TDS2022C相见恨晚" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                大家都说，和TDS2022C相见恨晚            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/40p?eefocustext" title="采样率2GS/s带宽100MHz ，只有一个地方能买到" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                采样率2GS/s带宽100MHz ，只有一个地方能买到            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/40q?eefocustext" title="天猫旗舰店PK美国官网，让你拿到泰克的最大折扣" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                天猫旗舰店PK美国官网，让你拿到泰克的最大折扣            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/40r?eefocustext" title="一切诡异波形都能抓到，江湖人称示波器界的李逵" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                一切诡异波形都能抓到，江湖人称示波器界的李逵            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/40s?eefocustext" title="既然这台示波器这么贵，我就不提送大礼包的事了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                既然这台示波器这么贵，我就不提送大礼包的事了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/40t?eefocustext" title="万万没想到，MSO2014B降价6000块" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                万万没想到，MSO2014B降价6000块            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/40u?eefocustext" title="真的不想告诉你，这款6位半数字万用表都在6折秒杀了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                真的不想告诉你，这款6位半数字万用表都在6折秒杀了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41w?eefocustext" title="5百多条评价，这款百兆带宽数字示波器火了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                5百多条评价，这款百兆带宽数字示波器火了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41x?eefocustext" title="老板不在，今天买啥都一律送2支无源电压探头" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                老板不在，今天买啥都一律送2支无源电压探头            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41y?eefocustext" title="一向抠门的王老板，今天拍了台2万多的示波器…" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                一向抠门的王老板，今天拍了台2万多的示波器…            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/41z?eefocustext" title="直降两千块，想买电流探头的看过来" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                直降两千块，想买电流探头的看过来            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/420?eefocustext" title="6折秒杀6位半数字万用表，值哭了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                6折秒杀6位半数字万用表，值哭了            </a>
+        </li>
+            </ul>
+</div>
+</div></div>
+<div class="panel panel-default widget-pi">
+    <div class="panel-heading">
+                        <span class="pi-icon-dot-o"></span>
+                        <div class="pi-panel-heading-inner">PI专区</div>
+                    </div><div class="panel-body"><div class="widget-list widget-list-common">
+    <ul>
+                <li>
+            <a href="http://url.eefocus.com/4el" title="这款双通道驱动核，分分钟治服3.3 kV IGBT" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                这款双通道驱动核，分分钟治服3.3 kV IGBT            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4em" title="15年不离不弃，这颗单通道驱动核承诺你" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                15年不离不弃，这颗单通道驱动核承诺你            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4en" title="即插即用，这才是驱动器业界良心" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                即插即用，这才是驱动器业界良心            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4eo" title="集成650V MOSFET，这款反激式开关IC已经上天了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                集成650V MOSFET，这款反激式开关IC已经上天了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4ep" title="小伙伴们都被HiperPFS-3的功率因数吓趴了" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                小伙伴们都被HiperPFS-3的功率因数吓趴了            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4eq" title="手慢无！20W USB PD电源管理方案曝光" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                手慢无！20W USB PD电源管理方案曝光            </a>
+        </li>
+                <li>
+            <a href="http://url.eefocus.com/4er" title="玩转可控硅调光，这种LED驱动器IC才靠谱" class="pi-ellipsis pi-ellipsis-1" target="_blank">
+                玩转可控硅调光，这种LED驱动器IC才靠谱            </a>
+        </li>
+            </ul>
+</div>
+</div></div>
+						</div>
+									</div>
+
+				<div class="pi-zone-2-7 col-xs-9">
+						
+						
+												
+						<!-- Module content starts -->
+													<div class="pi-module-content col-md-12">
+								<div class="pi-article-module">
+	<div class="article-header">
+		<h2 class="headline">【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序</h2>
+		<div class="article-meta">
+			<div class="clearfix">
+				<div class="pull-left">
+					2015-03-12 03:30:29				</div>
+				<div class="pull-right">
+					<div class="clearfix article-share">
+						<!-- JiaThis Button BEGIN -->
+						<div class="pull-right jiathis_style">
+							<span class="jiathis_txt">分享：</span>
+							<a class="jiathis_button_tsina" title="分享到微博"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+							<a class="jiathis_button_tqq" title="分享到腾讯微博"><span class="jiathis_txt jtico jtico_tqq"></span></a>
+							<a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jtico jtico_renren"></span></a>
+							<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+						</div>
+						<script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/jia.js" charset="utf-8">
+						</script><script type="text/javascript" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/plugin.client.js" charset="utf-8"></script>
+						<!-- JiaThis Button END -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="article-tags">
+			<div class="tag-terms">
+	<span class="tag-label">标签：</span>
+		<span class="fa fa-tag"></span> <a href="http://www.eefocus.com/tag/term/RaspberryPi/m/blog" title="RaspberryPi" target="_blank">RaspberryPi</a>		<span class="fa fa-tag"></span> <a href="http://www.eefocus.com/tag/term/%E6%A0%91%E8%8E%93%E6%B4%BE2/m/blog" title="树莓派2" target="_blank">树莓派2</a>		<span class="fa fa-tag"></span> <a href="http://www.eefocus.com/tag/term/Creator/m/blog" title="Creator" target="_blank">Creator</a>	</div>		</div>
+	</div>
+	<div class="clearfix mb10 article-content">
+		<div class="clearfix">
+			<div class="article-body">
+				<p>
+	写在前面：</p>
+<p>
+	在这段一个人的生活中，想要静下来做点事情。翻来想去，不如读书、学习，借助手里的这两块树莓派，正好如愿。</p>
+<p>
+	于是决定把自己的学习和体验记录下来，一来给自己留作日后的参考，同时也为自己关于使用开源硬件建立快速原型设计平台的构想储备些知识。</p>
+<p>
+	====================================================================</p>
+<p>
+	<strong>1.Qt Creator</strong><strong>的安装及配置</strong></p>
+<p>
+	首先通过apt-get安装Qt Creator工具，同时会自动安装4.8版本的Qt-Lib库。</p>
+<p>
+	<span style="color:#000080;">$ sudo apt-get install qtcreator</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	通过桌面Menu -&gt; Programming -&gt; QtCreator 启动图形界面。</p>
+<p>
+	&nbsp;</p>
+<p>
+	由于Qt Creator不能自动识别树莓派上的工具链，因此需要手动添加。点击Tools -&gt; Options打开配置对话框，在Build &amp; Run -&gt; Tool Chains选项卡中点击Add添加GCC工具链，Compiler设置为/usr/bin/gcc，Debugger可设置为/usr/bin/gdb。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500934f6f7e6.jpg" target="_blank"><img alt="qt_toolchain.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500934f6f7e6-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	完成设置后我们可以通过一个简单的工程验证Qt是否可用。建立一个Qt Gui Application工程HelloQt。添加一个Label和Push Button。在Button上右键选择go to slot。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500932c6b06b.jpg" target="_blank"><img alt="qt_helloqt_gui.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500932c6b06b-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	选择Clicked()信号槽（即事件）。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/550093eac7bd8.jpg" target="_blank"><img alt="qt_gotoslot.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/550093eac7bd8-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	在on_pushButton_clicked()事件执行函数中添加改变label文字的语句。</p>
+<p>
+	<span style="color:#000080;">void HelloQt::on_pushButton_clicked()</span></p>
+<p>
+	<span style="color:#000080;">{</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; ui-&gt;label-&gt;setText("Hello Qt!");</span></p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	保存工程，通过<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500921a315e8.jpg" style="text-align: center;" target="_blank"><img alt="qt_build_button.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500921a315e8-thumb.jpg"></a>按钮编译工程。这时候还无法直接在Qt Creator中运行编译好的程序，这是因为缺少某些设置，我们稍后再讲。打开工程的编译目录（兔子这里是helloQt-build-embedded-Qt_4_8_2_in_PATH__System__Release），可以发现已经有编译好的可执行文件helloQt，双击执行即可。</p>
+<p>
+	运行效果：</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500921fe3285.jpg" target="_blank"><img alt="qt_hello_run.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500921fe3285-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	<strong>2.</strong><strong>在Qt</strong><strong>工程中调用WiringPi</strong></p>
+<p>
+	新建一个Qt Gui Application工程HelloWP。在窗口中添加一个Label和两个Push Button，Button分别命名为LED On和LED Off。为两个Button分别添加Slot。这里通过两个按键控制LED的亮灭状态，通过label显示开关状态。由一个QTimer定时器负责读取并刷新按键的状态。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/55009398e5322.jpg" target="_blank"><img alt="qt_gui.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/55009398e5322-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	将树莓派的BCM_GPIO18连接LED （低电平导通），BCM_GPIO17 连接开关按键（按下时为低电平）。注意这里使用的是Broadcom芯片原始的GPIO定义。</p>
+<p>
+	&nbsp;</p>
+<p>
+	修改hellowp.cpp文件代码如下：</p>
+<p>
+	<span style="color:#000080;">#include "hellowp.h"</span></p>
+<p>
+	<span style="color:#000080;">#include "ui_hellowp.h"</span></p>
+<p>
+	<span style="color:#000080;">#include "wiringPi.h"</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">helloWP::helloWP(QWidget *parent) :</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; QMainWindow(parent),</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; ui(new Ui::helloWP)</span></p>
+<p>
+	<span style="color:#000080;">{&nbsp;&nbsp;&nbsp;</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; ui-&gt;setupUi(this);</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; wiringPiSetupSys();</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; pinMode(18, OUTPUT);</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; pinMode(17, INPUT);</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; digitalWrite(18, HIGH);</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; switch_timer = new QTimer();</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; connect(switch_timer, SIGNAL(timeout()), this, SLOT(timerUpDate()));</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; switch_timer-&gt;start(100);</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">helloWP::~helloWP()</span></p>
+<p>
+	<span style="color:#000080;">{</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; delete ui;</span></p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">void helloWP::timerUpDate()</span></p>
+<p>
+	<span style="color:#000080;">{</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; if(digitalRead(17) == LOW)</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ui-&gt;label-&gt;setText("Switch is On!");</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; else</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ui-&gt;label-&gt;setText("Switch is OFF!");</span></p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">void helloWP::on_pushButton_clicked()</span></p>
+<p>
+	<span style="color:#000080;">{</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; digitalWrite(18, LOW);</span></p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">void helloWP::on_pushButton_2_clicked()</span></p>
+<p>
+	<span style="color:#000080;">{</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; digitalWrite(18, HIGH);</span></p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	修改hellowp.h文件代码如下：</p>
+<p>
+	<span style="color:#000080;">#ifndef HELLOWP_H</span></p>
+<p>
+	<span style="color:#000080;">#define HELLOWP_H</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">#include &lt;QMainWindow&gt;</span></p>
+<p>
+	<span style="color:#000080;">#include &lt;QtCore&gt;</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">namespace Ui {</span></p>
+<p>
+	<span style="color:#000080;">class helloWP;</span></p>
+<p>
+	<span style="color:#000080;">}</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">class helloWP : public QMainWindow</span></p>
+<p>
+	<span style="color:#000080;">{</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; Q_OBJECT</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp;</span></p>
+<p>
+	<span style="color:#000080;">public:</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; explicit helloWP(QWidget *parent = 0);</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; ~helloWP();</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp;</span></p>
+<p>
+	<span style="color:#000080;">private slots:</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; void on_pushButton_clicked();</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; void on_pushButton_2_clicked();</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; void timerUpDate();</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">private:</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; Ui::helloWP *ui;</span></p>
+<p>
+	<span style="color:#000080;">&nbsp;&nbsp;&nbsp; QTimer *switch_timer;</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">};</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	<span style="color:#000080;">#endif // HELLOWP_H</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	此时对工程进行编译会报错，提示找不到wiringPi相关的函数。这是因为我们需要手动添加编译参数，将wiringPi库包含进工程中。</p>
+<p>
+	使用文本编辑器打开helloWP.pro工程文件，在末尾添加：</p>
+<p>
+	LIBS += -lwiringPi</p>
+<p>
+	&nbsp;</p>
+<p>
+	保存后再编译即可通过。</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500945eaa9e6.jpg" target="_blank"><img alt="qt_include_wiring.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500945eaa9e6-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	下面手动设置执行参数使程序可以在Qt中直接执行。在Projects -&gt; Run Settings选项卡的Run configuration栏中添加Custom Executable，将Executable属性设置为%{buildDir}/helloWP（将helloWP替换为你的工程编译生成的可执行文件即可）。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500931d54f37.jpg" target="_blank"><img alt="qt_run_settings.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500931d54f37-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	此时便可以通过Qt自动编译执行程序了。</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500921d0e41b.jpg" target="_blank"><img alt="qt_run_button.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500921d0e41b-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	需要注意的是，我们使用的wiringPiSetupSys()初始化函数需要额外export操作才能使用GPIO。这和一般引用了wiringPi的C程序是相同的。如果使用wiringPiSetup()函数则不需要export操作，但是编译好的程序必须在root权限下执行。</p>
+<p>
+	export指令为：</p>
+<p>
+	<span style="color:#000080;">$ gpio export 17 in</span></p>
+<p>
+	<span style="color:#000080;">$ gpio export 18 out</span></p>
+<p>
+	&nbsp;</p>
+<p>
+	我们也可以将这一命令添加到Qt Creator中，使其编译运行时自动执行。只需在Deployment中添加Custom Process即可。如下图：</p>
+<p>
+	&nbsp;</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500923a28acb.jpg" target="_blank"><img alt="qt_export_gpio.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500923a28acb-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	程序执行效果如图，按键控制LED亮灭，开关的状态也实时显示在窗口中。</p>
+<p style="text-align:center;">
+	<a href="http://upload.semidata.info/www.eefocus.com/blog/media/201503/5500923031f36.jpg" target="_blank"><img alt="qt_run.jpg" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/5500923031f36-thumb.jpg"></a></p>
+<p style="text-align:center;">
+	&nbsp;</p>
+<p>
+	最后是打包好的工程文件：</p>
+<p>
+	<a href="http://www.eefocus.com/blog/media/download/id-333497">helloQt.zip</a></p>
+<p>
+	<a href="http://www.eefocus.com/blog/media/download/id-334695">helloWP.rar</a></p>			</div>
+		</div>
+		<div class="clearfix">
+					</div>
+				
+		<div class="blog-detail-action hide-owner-dom hide">
+			<a title="编辑" href="http://www.eefocus.com/blog/article/edit/id-310769"><i class="fa fa-pencil"></i> 编辑</a> &nbsp;|&nbsp;
+			<a title="删除" onclick="return window.confirm(&#39;您确定要删除吗？&#39;);" href="http://www.eefocus.com/blog/article/delete/id-310769"><i class="fa fa-minus"></i> 删除</a>
+		</div>
+	</div>
+
+	<div class="clearfix article-footer">
+		<div class="article-category pull-left">
+			<label>分类：</label><a title="RaspberryPi" href="http://www.eefocus.com/nightseas/blog/cate_13944_0.html">RaspberryPi</a>
+		</div>
+		<div class="pull-right article-310769">
+			浏览 ( <span class="visits-count">8364</span> ) |
+			评论 ( <span class="comment-count">5</span> )
+		</div>
+	</div>
+
+	<div class="relate" style="font-size:14px;margin: 20px 0;">
+		
+			<span>上一篇：</span><a title="【玩树莓】编程篇（二）Python TCP、UDP 网络编程" href="http://www.eefocus.com/nightseas/blog/15-03/310847_48fe6.html">【玩树莓】编程篇（二）Python TCP、UDP 网络编程</a>
+			&nbsp;|&nbsp;
+			<span>下一篇：</span><a title="【玩树莓】新人换故人，树莓派2略谈" href="http://www.eefocus.com/nightseas/blog/15-03/310723_68ffb.html">【玩树莓】新人换故人，树莓派2略谈</a>
+				</div>
+
+	<div class="gg clearfix text-center" style="margin-top: 20px; margin-bottom: 20px;">
+		<script type="text/javascript"><!--// <![CDATA[
+			/* [id16] 与非网_底部矩形广告位（640×80） */
+			OA_show(16);
+			// ]]> --></script><script language="JavaScript1.1" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/ck(1).php">
+</script><div class="GoogleActiveViewClass" id="DfaVisibilityIdentifier_1908346610"><a target="_blank" href="https://adclick.g.doubleclick.net/pcs/click?xai=AKAOjstKsIYUCSTC7ok-msD8_80TOo3fjSSEpTsU9N4egngbWTshm0_Tc_Z1uJsw10ayhcHv8KzMZZEZoTbbslLjaNbrq_4hlapHuQ70EtffgUHCUlR-hmSF&sig=Cg0ArKJSzBg3A68i11Ly&urlfix=1&adurl=http://gg.eefocus.com/www/delivery/ck.php%3Foaparams%3D2__bannerid%3D9154__zoneid%3D16__cb%3D7f2e62bc62__oadest%3Dhttp%253A%252F%252Fanalytics.supplyframe.cn%252Ftrackingservlet%252Ftrack%252F%253Faction%253DadClick_eefocus%2526value2%253D9154%2526value3%253D44%2526zone%253D16%2526extra%253Dh_crc%253D2625360942%257Csrv%253Dvm-gg-2%257Cox_v%253D2.8%257Ch_value%253D80b77c0bf396eaaa1466152866%257Cgeo%253DCN%2526zone%253D16%2526url%253Dhttp://www.digikey.cn/zh/product-highlight/m/molex-connector/rf-technology-solutions"><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/728x90_RFTechnology_Updated6-16_CN.jpg" alt="Advertisement" border="0" width="728" height="90"></a></div>
+<noscript>
+&lt;a href="http://gg.eefocus.com/www/delivery/ck.php?oaparams=2__bannerid=9154__zoneid=16__cb=7f2e62bc62__oadest=http%3A%2F%2Fanalytics.supplyframe.cn%2Ftrackingservlet%2Ftrack%2F%3Faction%3DadClick_eefocus%26value2%3D9154%26value3%3D44%26zone%3D16%26extra%3Dh_crc%3D2625360942%7Csrv%3Dvm-gg-2%7Cox_v%3D2.8%7Ch_value%3D80b77c0bf396eaaa1466152866%7Cgeo%3DCN%26zone%3D16%26url%3Dhttps%3A%2F%2Fad.doubleclick.net%2Fddm%2Fjump%2FN4481.eefocus%2FB7277836.132585948%3Bsz%3D728x90%3Bkw%3D%5Burl_encoded_publisher_data%5D%3Bord%3D%5Btimestamp%5D%3F" target="_blank"&gt;
+&lt;IMG SRC="https://ad.doubleclick.net/ddm/ad/N4481.eefocus/B7277836.132585948;sz=728x90;kw=[url_encoded_publisher_data];ord=7f2e62bc62;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=?" BORDER=0 WIDTH=728 HEIGHT=90 ALT="Advertisement"&gt;&lt;/A&gt;
+</noscript><div id="beacon_7f2e62bc62" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/lg(1).php" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div><img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/saved_resource(2)" width="0" height="0" alt="" style="display:none">
+<noscript>&lt;a target='_blank' href='http://gg.eefocus.com/www/delivery/ck.php?n=d4f1bf5'&gt;&lt;img border='0' alt='' src='http://gg.eefocus.com/www/delivery/avw.php?zoneid=16&amp;amp;n=d4f1bf5' /&gt;&lt;/a&gt;</noscript>
+	</div>
+	<div class="clearfix">
+		<div class="comment-info text-center">
+			<span class="comment-title">以下网友评论只代表个人观点，不代表本网站的观点或立场</span>
+		</div>
+		<div id="pi-comment-lead" style=""><div class="panel panel-default" id="comments">
+    <div class="panel-heading">
+        全部评论 
+        <strong>(5)</strong>
+    </div>
+    <div class="panel-body">
+        <div class="comment-item" id="js-comment-form">
+    <textarea placeholder="请发表评论……" class="form-control js-comment-txt" rows="3"></textarea>
+    <div class="hide clearfix comment-form">
+        <form action="http://www.eefocus.com/comment-blog/post/submit/" method="POST" name="comment-post" id="comment-post">        <div class="form-group">
+            <textarea placeholder="请发表评论……" name="content" id="post-content" class="form-control control-word" data-size="0" rows="3"></textarea>
+        </div>
+        <input type="hidden" name="id" value=""><input type="hidden" name="root" value="2147484407"><input type="hidden" name="reply" value=""><input type="hidden" name="module" value=""><input type="hidden" name="type" value=""><input type="hidden" name="item" value=""><input type="hidden" name="redirect" value="http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html"><input name="markup" type="hidden" value="text"><img width="150" height="50" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/captcha.php" onclick="this.src=&#39;http://www.eefocus.com/script/captcha.php?id=03f092f077e552e2e39a0d0a0463fdc7&amp;refresh=&#39;+Math.random()" style="cursor: pointer; vertical-align: middle;" alt="验证码图片" title="点击刷新验证码" id="03f092f077e552e2e39a0d0a0463fdc7-image"><br><input name="captcha[id]" type="hidden" value="03f092f077e552e2e39a0d0a0463fdc7"><input name="captcha[input]" type="text">        <div class="pull-right js-comment-btn">
+            <button class="btn btn-primary">
+                发表评论            </button>
+        </div>
+    </form></div>
+        <div class="hide well well-sm">
+        请<a href="http://www.eefocus.com/saml/index/login/?redirect=http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html">登录</a>后发表评论    </div>
+</div>
+<div class="comment-item hide" id="js-comment-form-reply" style="margin-top:8px;">
+	<div class="clearfix comment-form">
+		<form action="http://www.eefocus.com/comment-blog/post/submit/" method="POST" name="comment-post" id="comment-post">		<div class="form-group">
+			<textarea placeholder="请发表评论……" name="content" class="form-control control-word" data-size="0" rows="3"></textarea>
+		</div>
+		<input type="hidden" name="id" value=""><input type="hidden" name="root" value="2147484407"><input type="hidden" name="reply" value=""><input type="hidden" name="module" value=""><input type="hidden" name="type" value=""><input type="hidden" name="item" value=""><input type="hidden" name="redirect" value="http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html"><input name="markup" type="hidden" value="text"><img width="150" height="50" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/captcha(1).php" onclick="this.src=&#39;http://www.eefocus.com/script/captcha.php?id=e171fb6f62765cb7f7980ccb19a5d0cf&amp;refresh=&#39;+Math.random()" style="cursor: pointer; vertical-align: middle;" alt="验证码图片" title="点击刷新验证码" id="e171fb6f62765cb7f7980ccb19a5d0cf-image"><br><input name="captcha[id]" type="hidden" value="e171fb6f62765cb7f7980ccb19a5d0cf"><input name="captcha[input]" type="text">		<div class="pull-right js-comment-btn">
+			<button class="btn btn-primary">
+				回复			</button>
+		</div>
+	</form></div>
+		<div class="hide well well-sm">
+		请<a href="http://www.eefocus.com/saml/index/login/?redirect=http%3A%2F%2Fwww.eefocus.com%2Fnightseas%2Fblog%2F15-03%2F310769_b2d11.html">登录</a>后发表评论	</div>
+</div>
+
+
+<div class="pi-status active js-video-status" data-id="">
+    <div class="pi-status-director"></div>
+</div>
+
+                        <div class="media comment-item" id="comment-55112">
+            <a class="pull-left" href="http://account.eefocus.com/user/profile/3232808" target="_blank">
+                <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/b0496d3c1a8eb26049ab41ecfa67934b.png" alt="" width="46">            </a>
+            <div class="media-body">
+                
+                    <div class="media-heading">
+                        <a href="http://account.eefocus.com/user/profile/3232808" target="_blank" style="margin-right: 20px;">xxx-dailei</a>
+                        <span class="muted">2015-12-18 20:53:53</span>
+                    </div>
+                    <p>首先对作者的奉献表示尊敬。
+另外，我本人在树莓派2 B型上运行Qtcreator遇到来这样的问题，不知道楼主有没有遇到过，请不吝赐教
+pp@pp-desktop:~$ sudo qtcreator
+libEGL warning: DRI2: failed to authenticate
+SOFT ASSERT: "tc" in file /build/buildd/qtcreator-3.1.1/src/plugins/debugger/debuggerkitinformation.cpp, line 62
+No tool chain set from kit "桌面".
+No tool chain set from kit "桌面".
+Unable to find an X11 visual which matches EGL config 125
+Could not initialize OpenGL
+                                    </p><div class="comment-operation">
+                                    </div>
+				<div class="media-reply"></div>
+
+				            </div>
+        </div>
+                <div class="media comment-item" id="comment-54999">
+            <a class="pull-left" href="http://account.eefocus.com/user/profile/3174377" target="_blank">
+                <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/a6c3cd99233a53860eb7ffd5f2335a0c.jpg" alt="" width="46">            </a>
+            <div class="media-body">
+                
+                    <div class="media-heading">
+                        <a href="http://account.eefocus.com/user/profile/3174377" target="_blank" style="margin-right: 20px;">sunshineK</a>
+                        <span class="muted">2015-10-24 11:20:39</span>
+                    </div>
+                    <p>你好，看了你的写的，但是想知道最终效果是程序不能控制LED的亮灭吗？
+                                    </p><div class="comment-operation">
+                                    </div>
+				<div class="media-reply"></div>
+
+				            </div>
+        </div>
+                <div class="media comment-item" id="comment-54397">
+            <a class="pull-left" href="http://account.eefocus.com/user/profile/251440" target="_blank">
+                <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/f6a32cc9d030d24d8064d0fcc841443c.jpg" alt="" width="46">            </a>
+            <div class="media-body">
+                
+                    <div class="media-heading">
+                        <a href="http://account.eefocus.com/user/profile/251440" target="_blank" style="margin-right: 20px;">咖啡不解困</a>
+                        <span class="muted">2015-03-17 14:19:45</span>
+                    </div>
+                    <p>玩的多了就成创客了(*^__^*)
+                                    </p><div class="comment-operation">
+                                    </div>
+				<div class="media-reply"></div>
+
+				            </div>
+        </div>
+                <div class="media comment-item" id="comment-54380">
+            <a class="pull-left" href="http://account.eefocus.com/user/profile/251440" target="_blank">
+                <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/f6a32cc9d030d24d8064d0fcc841443c.jpg" alt="" width="46">            </a>
+            <div class="media-body">
+                
+                    <div class="media-heading">
+                        <a href="http://account.eefocus.com/user/profile/251440" target="_blank" style="margin-right: 20px;">咖啡不解困</a>
+                        <span class="muted">2015-03-12 17:16:26</span>
+                    </div>
+                    <p>兔子开始研究树莓派了？？？
+                                    </p><div class="comment-operation">
+                                    </div>
+				<div class="media-reply"></div>
+
+															<div class="media comment-item">
+							<a class="pull-left" href="http://account.eefocus.com/user/profile/293751" target="_blank">
+								<img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/bc801fb26e07b87a80035fc9ce5938ef(1).jpg" alt="" width="46">							</a>
+							<div class="media-body">
+								
+									<div class="media-heading">
+										<a href="http://account.eefocus.com/user/profile/293751" target="_blank" style="margin-right: 20px;">懒兔子</a>
+										<span class="muted">2015-03-12 17:37:00</span>
+									</div>
+									<p>是啊，不玩树莓不好意思自称创客哈哈
+																	</p><div class="comment-operation">
+																	</div>
+							</div>
+						</div>
+									            </div>
+        </div>
+                <a href="http://www.eefocus.com/comment-blog/list/2147484407" class="btn btn-default btn-block" style="margin-top: 10px;">
+            查看全部评论        </a>
+            </div>
+</div>
+</div>
+<script>
+    $.getJSON("/comment-blog/index/load/", {
+        uri: $(location).attr('href'),
+        time: new Date().getTime()
+    })
+    .done(function (data) {
+        if (data.content) {
+            var el = $('#pi-comment-lead');
+            el.show().html(data.content);
+        }
+    });
+</script>	</div>
+</div>
+
+<script>
+	var url = '/blog/homepage/stats/uid-293751/ids-310769/do-5763b7a29c65a';
+	$.get(url, function(data) {
+		if (data.islogin == 1) {
+			$('.hide-owner-dom').removeClass('hide');
+		} else if (data.islogin == 2) {
+			//$('.link-my-blog').removeClass('hide').attr('href', data.link);
+			$('.show-owner-dom').removeClass('hide');
+		} else {
+			$('.show-owner-dom').removeClass('hide');
+		}
+		if (data.articles) {
+			$.each(data.articles, function(){
+				$(".article-" + this.id + " .visits-count").html(this.visits);
+				$(".article-" + this.id + " .comment-count").html(this.comment);
+			});
+		}
+	}, 'json');
+</script>
+							</div>
+												<!-- Module content ends -->
+
+						
+						
+																		
+						
+																							</div>
+                </div>
+            </div>
+        
+		
+        
+        <!-- Bottom foot zone -->
+            </div><iframe src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/cTrvNaRi.html" width="0" height="0" style="display: none;"></iframe>
+
+    <!-- Footer: sitelink -->
+    <div class="footer pi-footer text-center">
+    	<script src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/qrcode"></script>
+        <div class="container">
+            <div>
+	<a href="http://www.eefocus.com/corp/aboutEefocus.html" title="关于我们">关于我们</a> |
+	<a href="http://www.eefocus.com/corp/contact.html" title="联系我们">联系我们</a> |
+	<a href="http://www.eefocus.com/corp/EefocusHr.html" title="加入我们">加入我们</a> |
+	<a href="http://www.eefocus.com/corp/OnlineService.html" title="客户服务">客户服务</a> |
+	<a href="http://www.eefocus.com/corp/law.html" title="相关法律">相关法律</a> |
+	<a href="http://www.eefocus.com/corp/map.html" title="网站地图">网站地图</a> |
+        <a href="http://www.eefocus.com/page/app/" title="客户端">客户端</a> |
+	<a href="http://www.eefocus.com/corp/link.html=" 友情链接"="">友情链接</a> |
+	<a href="http://www.eefocus.com/feedback/" title="建议指正">建议指正</a> |
+	<a target="_blank" href="http://weibo.com/eefocus" class="fc" title="@与非网"><i class="wb-icon"></i>@与非网</a>
+</div>
+<div>
+	旗下网站：
+	<a target="_blank" href="http://www.datasheet5.com/" title="集成电路查询网 datasheet5.com">
+		集成电路查询网 datasheet5.com
+	</a> |
+	<a target="_blank" href="http://www.cndzz.com/" title="电子电路网 cndzz.com">
+		电子电路网 cndzz.com
+	</a> <br>
+	© 2006-2014 与非门科技(北京)有限公司 All Rights Reserved. <br>
+	京ICP证:070212号
+	<a target="_blank" href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202007052800008">
+		<img width="25" height="28" border="0" align="absmiddle" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/biaoshi.gif">
+	</a>
+	北京市公安局备案编号：1101033715 京ICP备：10038094号
+</div>            <img src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/impression" style="display:none;">
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1502657-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['new._setAccount', 'UA-31944875-8']);
+  _gaq.push(['new._trackPageview']);
+  _gaq.push(['new._setAccount', 'UA-31944875-10']);
+  _gaq.push(['new._trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F644a837956e91928688d4a74b9917d47' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/h.js" type="text/javascript"></script><iframe src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/cTrvNaRi.html" width="0" height="0" style="display: none;"></iframe>
+
+<!-- supplyframe tag tracking code -->
+<script type="text/javascript">
+  (function() {
+    window._pa = window._pa || {};
+    var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+    pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.perfectaudience.com/serve/5499aafcda37a38c5f0000b5.js";
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+  })();
+</script>
+<!-- end tracking code -->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+<div id="js-api-qrcode-panel" class="api-qrcode-panel hidden-xxs api-qrcode-panel-show"><div id="js-api-qrcode-panel-inner" class="api-qrcode-panel-inner api-qrcode-panel-inner-show"><div class="api-qrcode-hd"><span id="js-api-qrcode-close" class="api-qrcode-close">×</span><div class="api-qrcode-title">官方微信</div></div><div class="api-qrcode-bd"><img class="api-qrcode-img" src="./【玩树莓】编程篇（一）在树莓派2上本地开发Qt GUI程序_files/eefocus.jpg"><div class="api-qrcode-desc"></div></div></div></div></body></html>

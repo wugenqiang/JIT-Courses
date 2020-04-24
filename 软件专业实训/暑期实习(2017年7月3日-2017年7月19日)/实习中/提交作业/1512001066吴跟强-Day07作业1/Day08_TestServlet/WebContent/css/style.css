@@ -1,0 +1,32 @@
+/*ͷ����ʽ*/
+/*ѡ����
+ *1��IDѡ���� ��#��
+ *2��CLASSѡ���� ��.
+ *3��Ԫ��ѡ���� Ԫ����
+ *4��α��ѡ����
+ *5������ѡ����
+ **/
+ .image1{
+    float:left;
+ }
+ .image2{
+    float:right;
+ }
+ .top{
+    width:100%;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+    border-bottom:1px #ededed solid;
+    background-color:#fafafa;
+ }
+ .text{
+    float:right;
+ }
+ .img-logo{
+   margin-top:10px;
+ }
+ .container{
+   width:100%;
+ }
+

@@ -1,0 +1,100 @@
+arduino
+
+
+byte seven_seg_digits[10] = { B00000011,  // = 0
+                              B10011111,  // = 1
+                              B00100101,  // = 2
+                              B00001101,  // = 3
+                              B10011001,  // = 4
+                              B01001001,  // = 5
+                              B01000001,  // = 6
+                              B00011111,  // = 7
+                              B00000001,  // = 8
+                              B00001001   // = 9
+                             };
+int latchPin = 6;
+int clockPin = 5;
+int dataPin = 4;
+int Time,num;
+unsigned long starttime , endtime , lasttime = 1000;
+void setup() {
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+  Serial.begin(9600);
+
+}
+
+
+void sevenSegWrite(byte digit, int b) {
+  
+  digitalWrite(8, HIGH);  
+  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
+  
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, seven_seg_digits[digit]);  
+  digitalWrite(latchPin, HIGH);
+  digitalWrite(b, LOW);
+}
+
+
+void showNum(int num) {
+  int b = 11;
+  while(1) {
+    sevenSegWrite(num % 10, b);
+    b -= 1;
+    if(num/10 > 0){
+      num /= 10;
+    }
+    else {
+      break;
+    }
+  }
+}
+
+void loop() {
+    if(Serial.available())
+ {
+    num = analogRead(A5);
+    Serial.println(num);
+    for(starttime = millis(),endtime = starttime + lasttime;starttime<endtime;starttime = millis())
+      showNum(num); 
+    Time = Serial.parseInt();
+    num = analogRead(A5);
+    Serial.println(num);
+    for(starttime = millis(),endtime = starttime + lasttime;starttime<endtime;starttime = millis())
+     showNum(Time); 
+  }   
+}
+
+
+
+
+
+
+
+
+Ê±¼ä£¬Ê÷Ý®ÅÉ´«arduino
+import serial
+import os
+import time,subprocess
+
+ser = serial.Serial('/dev/ttyACM0',9600,timeout=1)
+ser.open()
+try:
+   while 1:
+         subprocess.call("clear")
+         i=os.system('clear')
+         response = ser.readline()
+         print time.strftime('%H%M')
+         print response
+         ser.write('{0:5}'.format(time.strftime('%H%M')))
+         time.sleep(1)
+except KeyboardInterrupt:
+         ser.close()

@@ -1,0 +1,132 @@
+室温与树莓派CPU温度声控PyQt窗口转换显示：
+
+1、树莓派上代码：
+
+from PyQt4 import QtCore, QtGui
+import os
+import serial
+import time
+ser = serial.Serial('/dev/ttyACM0',9600,timeout=1)
+ser.open()
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
+class Ui_HelloPyQt(object):
+    def setupUi(self, HelloPyQt):
+        HelloPyQt.setObjectName(_fromUtf8("HelloPyQt"))
+        HelloPyQt.resize(304, 212)
+        self.centralWidget = QtGui.QWidget(HelloPyQt)
+        self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
+        self.lcdTemp = QtGui.QLCDNumber(self.centralWidget)
+        self.lcdTemp.setGeometry(QtCore.QRect(40, 40, 221, 81))
+
+self.lcdTemp.setSmallDecimalPoint(False)
+        self.lcdTemp.setDigitCount(6)
+        self.lcdTemp.setObjectName(_fromUtf8("lcdTemp"))
+        self.sliderAlarm = QtGui.QSlider(self.centralWidget)
+        self.sliderAlarm.setGeometry(QtCore.QRect(40, 170, 221, 16))
+        self.sliderAlarm.setMaximum(120)
+        self.sliderAlarm.setProperty("value", 80)
+        self.sliderAlarm.setOrientation(QtCore.Qt.Horizontal)
+        self.sliderAlarm.setTickPosition(QtGui.QSlider.NoTicks)
+        self.sliderAlarm.setObjectName(_fromUtf8("sliderAlarm"))
+
+#Add timer
+        self.timerTemp = QtCore.QTimer(self.centralWidget)
+        HelloPyQt.setCentralWidget(self.centralWidget)
+
+        # Add slots
+        self.sliderAlarm.valueChanged.connect(self.sliderAlarm_ValueChanged)
+        self.timerTemp.timeout.connect(self.timerTemp_TimeOut)
+        # Use the timeout event to initialize the LCD
+        self.timerTemp_TimeOut()
+        # Start timer, time out per 2 seconds
+        self.timerTemp.start(2000)
+self.retranslateUi(HelloPyQt)
+        QtCore.QMetaObject.connectSlotsByName(HelloPyQt)
+
+        def retranslateUi(self, HelloPyQt):
+
+         HelloPyQt.setWindowTitle(QtGui.QApplication.translate("HelloPyQt", "HelloPyQt", None, QtGui.QApplication.UnicodeUTF8))
+
+         self.labelAlarm.setText(QtGui.QApplication.translate("HelloPyQt", "Alarm: 80C", None, QtGui.QApplication.UnicodeUTF8))
+
+         self.labelTemp.setText(QtGui.QApplication.translate("HelloPyQt", "Room Temperature", None, QtGui.QApplication.UnicodeUTF8))
+
+        # Event triggered when the value of labelAlarm changed
+        def sliderAlarm_ValueChanged(self):
+         self.labelAlarm.setText("Alarm: " + str(self.sliderAlarm.value()) + "C")
+
+        # Event triggered when timerTemp time out
+        def timerTemp_TimeOut(self):
+        # Get temperature from sensor file
+        sensor = os.popen("cat /sys/class/thermal/thermal_zone0/temp")
+        temp = float(sensor.readline())/1000
+        # ser.write("%.d" %int( temp*100))
+        temp2 = float(ser.readline())
+        alarm = float(self.sliderAlarm.value())
+        # Display trature
+        if temp2 == 0.0 :
+            self.lcdTemp.display("% 1fC" % temp)
+        else :
+            self.lcdTemp.display("%.1fC" % temp2)
+        # Check whether the temperature is too high
+        if temp <= alarm * 0.6:
+            self.lcdTemp.setStyleSheet("color: green")
+        elif temp <= alarm * 0.8:
+            self.lcdTemp.setStyleSheet("color: orange")
+  elif temp <= alarm:
+            self.lcdTemp.setStyleSheet("color: red")
+            ser.write("test")
+        else:
+            self.lcdTemp.setStyleSheet("color: red")
+            ser.write("test")
+            msg = QtGui.QMessageBox()
+            msg.setWindowTitle("Alarm")
+            msg.setText("Temperature is too high!")
+            msg.setIcon(QtGui.QMessageBox.Warning)
+msg.setIcon(QtGui.QMessageBox.Warning)
+            msg.exec_()
+            # You can do something else here, like shut down the system
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    HelloPyQt = QtGui.QMainWindow()
+    ui = Ui_HelloPyQt()
+    ui.setupUi(HelloPyQt)
+    HelloPyQt.show()
+sys.exit(app.exec_())
+
+
+2、Arduino上烧写代码：
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#define ONE_WIRE_BUS 2
+ 
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+ 
+void setup(void)
+{
+     Serial.begin(9600);
+     pinMode(4,INPUT);
+     sensors.begin();
+}
+ 
+void loop(void)
+{    
+     int n = digitalRead(4);
+     if(n==HIGH)
+     {   
+           sensors.requestTemperatures(); // 发送命令获取温度
+           Serial.println(sensors.getTempCByIndex(0));  
+           delay(2000);
+      }
+    else
+           Serial.println(0);  
+}
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>用户注册</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+		<style type="text/css">
+			.space{
+				height: 10px;
+			}
+			table input{
+				border: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="space">		
+		</div>
+		<div class="container">
+			<form action="/LibraryManageSystem/User_register.do" method="post">
+				<table id="insertable" class="table table-bordered">
+					<tr>
+						<td>姓名：</td>
+						<td><input type="text" name="name"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>密码：</td>
+						<td><input type="text" name="password"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>年龄：</td>
+						<td><input type="number" name="age"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>性别：</td>
+						<td><input type="number" name="sex"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>昵称：</td>
+						<td><input type="text" name="nickname" placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>用户类型：</td>
+						<td><input type="number" name="usertype"  placeholder="请输入【1：管理员，0：用户】" /></td>
+					</tr>
+				</table>
+				<button type="submit" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存
+				</button>
+			</form>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,222 @@
+.entrance-brand {
+  font-family: 'Microsoft YaHei',微软雅黑;
+}
+
+.nav-modules-container .nav-modules .nav-module .nav-module-title {
+  font-size: 12px !important;
+}
+
+/* entrance mobile */
+.entrance-mobile {
+  display: block !important;
+  position: relative;
+  width: 120px;
+  line-height: 44px;
+  float: left;
+  margin-left: 102px;
+  font-size: 18px;
+  color: #4c4c4c;
+  font-family: 'Microsoft YaHei',微软雅黑;
+}
+
+.entrance-sub-title img {
+  width: 9px;
+  height: 5px;
+}
+
+.entrance-mobile .phone-icon {
+  margin-right: 5px;
+  width: 12px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+.entrance-mobile .copywriting {
+  margin-right: 3px;
+  vertical-align: middle;
+}
+
+.entrance-mobile:hover .nav-mobile-modules-container {
+  display: block;
+}
+
+.entrance-mobile .nav-mobile-modules-container {
+  position: absolute;
+  top: 40px;
+  left: -281px;
+  width: 963px;
+  border: 1px solid #e6e5e5;
+  border-radius: 3px!important;
+  -moz-border-radius: 3px!important;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  z-index: 1015;
+  display: none;
+	-webkit-box-sizing: initial;
+	box-sizing: initial;
+}
+
+.entrance-mobile .nav-mobile-modules-container:before {
+  position: absolute;
+  top: -9.5px;
+  left: 378px;
+  display: inline-block;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #d9d9d9;
+  border-left: 8px solid transparent;
+  content: '';
+}
+
+.entrance-mobile .modules-body:before {
+  position: absolute;
+  top: -8.5px;
+  left: 378px;
+  display: inline-block;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  border-left: 8px solid transparent;
+  content: '';
+}
+
+.entrance-mobile .nav-mobile-modules-container .modules-one {
+  margin: 20px 0;
+}
+
+.entrance-mobile .nav-mobile-modules-container .border-one {
+  border-right: 1px solid #e6e5e5;
+}
+
+.entrance-mobile .nav-mobile-modules-container .modules-info {
+  padding-top: 15px;
+  width: 120px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .info-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4c4c4c;
+  height: 16px;
+  line-height: 16px;
+  margin-bottom: 8px;
+}
+
+.entrance-mobile .nav-mobile-modules-container a:hover .info-title {
+  color: #165d83;
+  text-decoration: underline;
+}
+
+.entrance-mobile .nav-mobile-modules-container .modules-one,
+.entrance-mobile .nav-mobile-modules-container .app-yinglai,
+.entrance-mobile .nav-mobile-modules-container .app-helper,
+.entrance-mobile .nav-mobile-modules-container .app-buyer,
+.entrance-mobile .nav-mobile-modules-container .app-moore8,
+.entrance-mobile .nav-mobile-modules-container .modules-info,
+.entrance-mobile .nav-mobile-modules-container .code-ios,
+.entrance-mobile .nav-mobile-modules-container .code-andr {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.entrance-mobile .nav-mobile-modules-container .modules-one {
+  padding-left: 20px;
+  padding-right: 15px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .app-yinglai {
+  background: url('../img/entrance-mobile/yinglai-icon.png') no-repeat 3px 2px;
+  width: 75px;
+  height: 71px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .app-helper {
+  background: url('../img/entrance-mobile/mobile-entrance-icons.png') no-repeat 0 0;
+  width: 75px;
+  height: 71px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .app-buyer {
+  background: url('../img/entrance-mobile/mobile-entrance-icons.png') no-repeat 0 -70px;
+  width: 75px;
+  height: 71px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .app-moore8 {
+  background: url('../img/entrance-mobile/moore8-icon.png') no-repeat 3px 2px;
+  width: 75px;
+  height: 71px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .info-title-ins {
+  font-size: 12px;
+  color: #4c4c4c;
+  height: 12px;
+  line-height: 15px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .yinglai-app-codes,
+.entrance-mobile .nav-mobile-modules-container .helper-app-codes,
+.entrance-mobile .nav-mobile-modules-container .buyer-app-codes,
+.entrance-mobile .nav-mobile-modules-container .moore8-app-codes {
+  margin-top: 20px;
+}
+
+.entrance-mobile .nav-mobile-modules-container .code-ios {
+  margin-right: 13px;
+}
+
+.entrance-mobile .yinglai-app-codes .down-ios-link,
+.entrance-mobile .helper-app-codes .down-ios-link,
+.entrance-mobile .buyer-app-codes .down-ios-link,
+.entrance-mobile .moore8-app-codes .down-ios-link {
+  background: url('../img/entrance-mobile/app-title-groups.png') no-repeat 0 0;
+  width: 86px;
+  height: 34px;
+  margin-top: 12px;
+}
+
+.entrance-mobile .yinglai-app-codes .down-andr-link,
+.entrance-mobile .helper-app-codes .down-andr-link,
+.entrance-mobile .buyer-app-codes .down-andr-link {
+  background: url('../img/entrance-mobile/app-title-groups.png') no-repeat 0 -34px;
+  width: 86px;
+  height: 34px;
+  margin-top: 12px;
+}
+
+@media (max-width: 1199px) {
+  .entrance-mobile .nav-mobile-modules-container {
+    left: -284px;
+  }
+
+  .entrance-mobile .nav-mobile-modules-container:before {
+    left: 378px;
+  }
+
+  .entrance-mobile .modules-body:before {
+    left: 378px;
+  }
+}
+
+@media (max-width: 991px) {
+  .entrance-mobile {
+    margin-left: 40px;
+  }
+
+  .entrance-mobile .nav-mobile-modules-container {
+    left: -222px;
+  }
+
+  .entrance-mobile .nav-mobile-modules-container:before {
+    left: 316px;
+  }
+
+  .entrance-mobile .modules-body:before {
+    left: 316px;
+  }
+}
+
+@media (max-width: 767px) {
+  .entrance-mobile {
+    display: none !important;
+  }
+}

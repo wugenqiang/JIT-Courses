@@ -1,0 +1,223 @@
+(function($){
+  var initOptions = {
+    source: 'eefocus',
+    expires: '7',
+    imgSrc: 'http://www.eehub.cn/qrcode/eefocus.jpg',
+    imgWidth: '100px',
+    imgHeight: 'auto',
+    imgLink: '',
+    title: '官方微信',
+    desc: '',
+    styleTop: '50%',
+    styleRight: '0',
+    styleMarginRight: '0'
+  };
+
+  var Qrcode = function(options) {
+    if (!(this instanceof Qrcode)) {
+      return new Qrcode(options);
+    }
+    this._init(options);
+  };
+
+  Qrcode.prototype = {
+    constructor: Qrcode,
+
+    _init: function(options) {
+      this._options(options);
+      this._appendHtml();
+      this._appendCss();
+      this._bindEvents();
+    },
+
+    _options: function(options) {
+      this.options = options;
+      return this;
+    },
+
+    _appendHtml: function() {
+      var title = this.options.title;
+      var desc = this.options.desc;
+      var imgSrc = this.options.imgSrc;
+      var imgLink = this.options.imgLink;
+      var html = '';
+
+      html += '<div id="js-api-qrcode-panel" class="api-qrcode-panel hidden-xxs">';
+      html +=   '<div id="js-api-qrcode-panel-inner" class="api-qrcode-panel-inner">';
+      html +=     '<div class="api-qrcode-hd">'
+      html +=       '<span id="js-api-qrcode-close" class="api-qrcode-close">&times;</span>';
+      html +=       '<div class="api-qrcode-title">' + title.split('\n').join('<br>') + '</div>';
+      html +=     '</div>'
+      html +=     '<div class="api-qrcode-bd">'
+      html +=       imgLink ? ('<a href="' + imgLink + '" target="_blank">') : '';
+      html +=         '<img class="api-qrcode-img" src="' + imgSrc + '">';
+      html +=       imgLink ? ('</a>') : '';
+      html +=       '<div class="api-qrcode-desc">' + desc.split('\n').join('<br>') + '</div>'
+      html +=     '</div>'
+      html +=   '</div>'
+      html += '</div>';
+
+      if ($) {
+        $('body').append(html);
+      } else {
+        var tempElem = document.createElement('div');
+        tempElem.innerHTML = html;
+        var qrcodeElem = tempElem.firstChild;
+        document.body.appendChild(qrcodeElem);
+      }
+
+      return this;
+    },
+
+    _appendCss: function() {
+      var imgWidth = this.options.imgWidth;
+      var imgHeight = this.options.imgHeight;
+      var styleTop = this.options.styleTop;
+      var styleRight = this.options.styleRight;
+      var styleMarginRight = this.options.styleMarginRight;
+      var qrcodeWidth = (parseInt(imgWidth) + 30) + 'px';
+      var css = '';
+
+      css += '.api-qrcode-panel { position: fixed !important; top: ' + styleTop + ' !important; right: 0 !important; margin-right: 0 !important; width: ' + qrcodeWidth + ' !important; z-index: 2000 !important; font: 12px/1.5 \'Microsoft yahei\' !important; color: #666 !important; transition: all .3s ease-in-out !important; word-break: break-all !important; word-wrap: break-word !important; text-align: center !important; }';
+      css += '.api-qrcode-panel.api-qrcode-panel-show { right: ' + styleRight + ' !important; margin-right: ' + styleMarginRight + ' !important; }';
+      css += '.api-qrcode-panel-inner { position: relative !important; right: -75% !important; transition: all .3s ease-in-out !important; padding: 7px 15px !important; background: #fff !important; }';
+      css += '.api-qrcode-panel-inner.api-qrcode-panel-inner-show { right: 0 !important; }';
+      css += '.api-qrcode-hd { text-align: left !important; padding: 0 6px !important; overflow: hidden !important; }';
+      css += '.api-qrcode-close { float: right !important; cursor: pointer !important; font-size: 14px !important; line-height: 16px !important; font-weight: bold !important; }';
+      css += '.api-qrcode-title {}';
+      css += '.api-qrcode-bd {}';
+      css += '.api-qrcode-img { display: block !important; margin: 0 !important; border: 0 !important; width: ' + imgWidth + ' !important; height: ' + imgHeight + ' !important; }';
+      css += '.api-qrcode-desc { padding: 0 6px !important; }';
+
+      var styleElem = document.createElement('style');
+      styleElem.type = 'text/css';
+
+      try {
+        if (styleElem.styleSheet) {
+          styleElem.styleSheet.cssText = css;
+        } else {
+          css += '@media (max-width: 480px) { .hidden-xxs { display: none !important; } }';
+          styleElem.innerHTML = css;
+        }
+      } catch(e) {}
+
+      document.getElementsByTagName('head')[0].appendChild(styleElem);
+      return this;
+    },
+
+    _bindEvents: function() {
+      var show1 = 'api-qrcode-panel-show';
+      var show2 = 'api-qrcode-panel-inner-show';
+      var expires = +this.options.expires;
+      var isHideQrcode = document.cookie.indexOf('hideQrcode') > -1;
+
+      function setHideQrcodeCookie() {
+        var t = new Date();
+        t.setTime(+t + expires * 24 * 3600 * 1000);
+        document.cookie = 'hideQrcode = true; expires=' + t.toUTCString();
+      }
+
+      if ($) {
+        var $qrcodeElem = $('#js-api-qrcode-panel');
+        var $qrcodeInnerElem = $('#js-api-qrcode-panel-inner');
+        var $qrcodeCloseElem = $('#js-api-qrcode-close');
+
+        if (!isHideQrcode) {
+          $qrcodeElem.addClass(show1);
+          $qrcodeInnerElem.addClass(show2);
+        }
+
+        $qrcodeInnerElem.hover(function() {
+          if (isHideQrcode) {
+            $qrcodeInnerElem.addClass(show2);
+          }
+        }, function() {
+          if (isHideQrcode) {
+            $qrcodeInnerElem.removeClass(show2);
+          }
+        });
+
+        $qrcodeCloseElem.click(function() {
+          isHideQrcode = true;
+
+          $qrcodeElem.hide().removeClass(show1);
+          $qrcodeInnerElem.removeClass(show2);
+
+          setTimeout(function(){
+            $qrcodeElem.show();
+          }, 800);
+
+          setHideQrcodeCookie();
+        });
+      } else {
+        var qrcodeElem = document.getElementById('js-api-qrcode-panel');
+        var qrcodeInnerElem = document.getElementById('js-api-qrcode-panel-inner');
+        var qrcodeCloseElem = document.getElementById('js-api-qrcode-close');
+
+        if (!isHideQrcode) {
+          if (qrcodeElem.className.indexOf(show1) == -1) {
+            qrcodeElem.className = qrcodeElem.className + ' ' + show1;
+          }
+
+          if (qrcodeInnerElem.className.indexOf(show2) == -1) {
+            qrcodeInnerElem.className = qrcodeInnerElem.className + ' ' + show2;
+          }
+        }
+
+        qrcodeInnerElem.onmouseover = function() {
+          if (isHideQrcode) {
+            if (qrcodeInnerElem.className.indexOf(show2) == -1) {
+              qrcodeInnerElem.className = qrcodeInnerElem.className + ' ' + show2;
+            }
+          }
+        };
+
+        qrcodeInnerElem.onmouseout = function() {
+          if (isHideQrcode) {
+            qrcodeInnerElem.className = qrcodeInnerElem.className.replace(show2, '');
+          }
+        };
+
+        qrcodeCloseElem.onclick = function() {
+          isHideQrcode = true;
+
+          qrcodeElem.style.display = 'none';
+          qrcodeElem.className = qrcodeElem.className.replace(show1, '');
+          qrcodeInnerElem.className = qrcodeInnerElem.className.replace(show2, '');
+
+          setTimeout(function(){
+            qrcodeElem.style.display = 'block';
+          }, 800);
+
+          setHideQrcodeCookie();
+        };
+      }
+
+      return this;
+    }
+  };
+
+  if ($) {
+    $(document).ready(function() {
+      Qrcode(initOptions);
+    });
+  } else {
+    function domready(callback) {
+      if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', function() {
+          callback();
+        }, false);
+      } else if (document.attachEvent) {
+        document.attachEvent('onreadystatechange', function() {
+          if (document.readyState === 'complete') {
+            callback();
+          }
+        });
+      }
+    }
+
+    domready(function() {
+      Qrcode(initOptions);
+    });
+  }
+})((typeof jQuery != 'undefined') && jQuery);

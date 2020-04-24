@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>添加书籍</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+		<style type="text/css">
+			.space{
+				height: 10px;
+			}
+			table input{
+				border: 0;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="space">		
+		</div>
+		<div class="container">
+			<form action="/LibraryManageSystem/bookInsert.do" method="post">
+				<table id="insertable" class="table table-bordered">
+					<tr>
+						<td>名称：</td>
+						<td><input type="text" name="name"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>作者：</td>
+						<td><input type="text" name="author"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>出版：</td>
+						<td><input type="text" name="publish"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>时间：</td>
+						<td><input type="date" name="publishdate"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>页数：</td>
+						<td><input type="number" name="page" placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>价格：</td>
+						<td><input type="number" name="price"  placeholder="请输入" /></td>
+					</tr>
+					<tr>
+						<td>简介：</td>
+						<td><input type="text" name="content"  placeholder="请输入" /></td>
+					</tr>
+				</table>
+				<button type="submit" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存
+				</button>
+			</form>
+		</div>
+	</body>
+
+</html>

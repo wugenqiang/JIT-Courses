@@ -1,0 +1,346 @@
+/* Navbar custom */
+.navbar-nav {
+    float: left;
+    margin: 0;
+}
+.navbar-nav > li {
+    float: left;
+}
+.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+}
+.navbar-right {
+    float: right !important;
+}
+
+/* Drop menu of eehub */
+.entrance-header {
+    background: #fff;
+    border-bottom: 1px solid #d3d0d1;
+    margin-bottom: 10px;
+    height: 44px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    min-width: 1139px;
+}
+.entrance-header a {
+    font-family: 'Microsoft YaHei',微软雅黑;
+    color: #4D4D4D;
+}
+.entrance-header a:hover {
+    text-decoration: none;
+    color: #d70c1e;
+}
+.entrance-search {
+    float: right;
+    margin-top: 6px;
+    margin-right: 15px;
+    border: 1px solid #e1e0e0;
+    height: 32px;
+}
+.entrance-search > div > span {
+    line-height: 30px;
+}
+.entrance-main {
+    padding: 9px 0 11px;
+    padding: 8px 0 12px\9;
+    float: left;
+    position: relative;
+    z-index: 1001;
+}
+.entrance-wrap {
+    position: absolute;
+    width: 565px;
+    top: 40px;
+    left: 22px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .1);
+    background: #fff;
+    border-radius: 4px;
+    z-index: 1015;
+    display: none;
+}
+.entrance-main:hover .entrance-wrap {
+    display: block;
+}
+.entrance-icons {
+    padding: 0;
+    margin: 0;
+    z-index: 1200;
+}
+.pi-icon-caret-up {
+    display: block;
+    width: 18px;
+    height: 8px;
+    background: url(../image/caret-up.png) 0 0 no-repeat;
+}
+.entrance-caret {
+    position: absolute;
+    left: 108px;
+    top: -8px;
+    font-size: 24px;
+    color: #d9d9d9;
+}
+.entrance-icon {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: top;
+    width: 140px;
+    text-align: center;
+    margin: 10px 0;
+    height: 105px;
+}
+.entrance-icon-link {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 140px;
+    height: 70px;
+    *display: block;
+    *font-size: 61px; /* height * 0.873 */
+    *font-family: Arial;
+}
+.entrance-icon-link img {
+    *margin-bottom: 20px;
+    vertical-align: middle;
+}
+.entrance-text-link {
+    font-size: 13px;
+    line-height: 15px;
+}
+.entrance-domain {
+    color: #4D4D4D;
+}
+.entrance-text-link:hover {
+    text-decoration: none;
+}
+.entrance-title {
+    color: #4D4D4D;
+}
+.entrance-website {
+    color: #999;
+    visibility: hidden;
+}
+.entrance-icon:hover .entrance-website {
+    visibility: visible;
+}
+.entrance-main-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+.entrance-sub-title {
+    font-size: 14px;
+}
+.ser-img {
+    background: url(../image/search.png) no-repeat center center;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    border: 0;
+    float: left;
+}
+.entrance-ser-input {
+    border: none;
+    height: 30px;
+    /*line-height: 30px;*/
+    float: left;
+    box-shadow: none;
+    width: 215px;
+    padding: 0;
+    *line-height: 30px;
+    line-height: 30px\0;
+    *padding-top: 2px;
+    *border: 0;
+}
+.login-in-box a:hover {
+    color: #4D4D4D;
+}
+.entrance-message {
+    margin-right: 18px;
+}
+.entrance-header .navbar-nav > li > a {
+    padding-top: 11px;
+    padding-bottom: 12px;
+}
+.pi-icon-angle-down {
+    margin-left: 4px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: 2px;
+    *vertical-align: 5px;
+    width: 7px;
+    height: 5px;
+    background: url(../image/angle-down.png) 0 0 no-repeat;
+}
+
+html {
+    padding-top: 44px;
+}
+
+.navbar-header-ef {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1050;
+    background: #fff;
+    border-bottom: 1px solid #d3d0d1;
+    height: 44px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.navbar-header-ef > .container {
+    position: relative;
+}
+
+.entrance-brand {
+    float: left;
+    width: 180px;
+}
+
+.entrance-brand:hover .nav-modules-container {
+    display: block;
+}
+
+.entrance-brand a:hover {
+    text-decoration: none;
+}
+
+.entrance-main-title {
+    font-weight: bold;
+    color: #4c4c4c;
+    line-height: 45px;
+    font-size: 18px;
+    color: #4c4c4c;
+}
+
+.entrance-sub-title {
+    font-size: 14px;
+    line-height: 45px;
+    color: #4c4c4c;
+}
+
+.nav-modules-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 4px;
+    z-index: 1015;
+    display: none;
+}
+
+.nav-modules-container:before {
+    position: absolute;
+    top: -9.5px;
+    left: 164px;
+    display: inline-block;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #d9d9d9;
+    border-left: 8px solid transparent;
+    content: '';
+}
+
+.nav-modules-container .nav-modules {
+    margin: 0;
+    padding: 0;
+    max-width: 565px;
+}
+
+.nav-modules-container .nav-modules:before {
+    position: absolute;
+    top: -7.5px;
+    left: 164px;
+    display: inline-block;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    border-left: 8px solid transparent;
+    content: '';
+}
+
+.nav-modules-container .nav-modules a {
+    color: #4D4D4D;
+}
+
+.nav-modules-container .nav-modules a:hover {
+    text-decoration: none;
+    color: #4D4D4D;
+}
+
+.nav-modules-container .nav-modules .nav-module {
+    display: inline-block;
+    vertical-align: top;
+    width: 140px;
+    text-align: center;
+    margin: 10px 0;
+    height: 105px;
+}
+
+.nav-modules-container .nav-modules .nav-module .nav-module-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-modules-container .nav-modules .nav-module .nav-module-icon {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 140px;
+    height: 70px;
+    line-height: 15px;
+}
+
+.nav-modules-container .nav-modules .nav-module .nav-module-icon img {
+    max-height: 63px;
+    vertical-align: middle;
+}
+
+.nav-modules-container .nav-modules .nav-module .nav-module-title {
+    margin-top: 4px;
+    line-height: 15px;
+}
+
+.login-in-box a:hover {
+    color: #4D4D4D;
+}
+
+.navbar-header-ef .navbar-nav {
+    margin: 0;
+    float: right;
+}
+
+.navbar-header-ef .navbar-nav > li {
+    float: left;
+}
+
+.navbar-header-ef .navbar-nav > li > a {
+    padding-top: 11px;
+    padding-bottom: 12px;
+}
+
+#user-bar-member a,
+#user-bar-anonymous a {
+    color: #222;
+}
+  
+@media (max-width: 1200px) {
+    .navbar-header-ef .container {
+        min-width: 600px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+  .bom2buy-text {
+    display: none !important;
+  }
+}

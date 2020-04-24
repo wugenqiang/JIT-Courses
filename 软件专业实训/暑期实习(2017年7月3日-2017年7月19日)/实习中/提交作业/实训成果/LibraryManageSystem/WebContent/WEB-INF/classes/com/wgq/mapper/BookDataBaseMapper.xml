@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wgq.dao.BookDataBaseDao">
+
+	<!-- 对象参数传递到了语句中，id、username 和 password 属性将会被查找，然后将它们的值传入预处理语句的参数中 -->
+	<select id="queryBookListByPage" resultType="com.wgq.entity.Book"
+		parameterType="com.wgq.entity.Page">
+		
+		select `id`,`name`,`author`,`publish`,`publishdate`,`page`,`price`,`content`
+		from `book`
+		
+		<where>
+		    <if test="search!=null">
+		        name like '%${search}%'
+		    </if>
+		</where>
+		
+		<if test="sortOrder!=null">
+		   order by id ${sortOrder}
+		</if>
+
+		<if test="offset>=0 and limit!=0">
+			limit #{offset},#{limit}
+		</if>
+	</select>
+	
+	<!-- 添加一本书 -->
+	<insert id="insertBook" parameterType="com.wgq.entity.Book">
+	    INSERT into `book` (`name`,`author`,`publish`,`publishdate`,`page`,`price`,`content`) values (#{name},#{author},#{publish},#{publishdate},#{page},#{price},#{content})
+	</insert>
+	
+	<!-- 删除一本书 -->
+	<delete id="deleteBook" parameterType="int">
+		DELETE FROM `book` WHERE id = #{id}
+	</delete>
+	
+	<!-- 更新数据 -->
+	<update id="updateBook" parameterType="com.wgq.entity.Book">
+	    UPDATE `book`
+	    <set>
+	        <if test="name!=null">
+	           `name`=#{name},
+	         </if>
+	        <if test="author!=null">
+	           `author`=#{author},
+	        </if>
+	        <if test="publish!=null">
+	           `publish`=#{publish},
+	        </if>
+	        <if test="publishdate!=null">
+	           `publishdate`=#{publishdate},
+	        </if>
+	        <if test="page!=null">
+	           `page`=#{page},
+	        </if>
+	        <if test="price!=null">
+	           `price`=#{price},
+	        </if>
+	        <if test="content!=null">
+	           `content`=#{content},
+	        </if>
+	    </set>
+	    where id = #{id};
+	 </update>
+	
+	
+</mapper>

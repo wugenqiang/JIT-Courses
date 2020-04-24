@@ -1,0 +1,29 @@
+arduino
+
+
+
+
+
+int photocellPin = 2; 
+int ledPin = 13; 
+int val =0;
+void setup() { 
+   pinMode(ledPin, OUTPUT);
+   Serial.begin (9600);
+}  
+void loop() { 
+  val =analogRead(photocellPin);
+  Serial.println(val);
+if(val<=512){ 
+    digitalWrite(ledPin, HIGH);  
+}  
+else{  
+    digitalWrite(ledPin, LOW); 
+    } 
+}
+
+
+
+
+
+

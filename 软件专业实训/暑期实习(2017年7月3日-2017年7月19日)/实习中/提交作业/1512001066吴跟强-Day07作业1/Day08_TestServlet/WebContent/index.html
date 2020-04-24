@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Strict//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
+<html> 
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+		<title>啦啦啦</title>
+		<!-- 引入CSS样式 -->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+        <!-- 引入bootstrp框架，给我们预先设置好好看的css样式和动画效果 -->
+	    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	    <!-- 引入javascript脚本：js是浏览器端运行脚本语言，只能由浏览器解释执行 -->
+	    <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<!-- 页面显示的内容 -->
+
+	<body>
+		<div>
+			<!-- 快捷提示 -->
+			<!--Bootstrap:是一个前端的框架-->
+			<!-- div:显示的时候是一个矩形区域 -->
+			<!-- 标签的属性：
+                class 《类》：用在多个地方
+                id:不能重复 -->
+           
+			<div class="container">
+				<div class="top">
+					<div class="text">
+						<!-- a标签：链接，href：指定跳转地址 -->
+						<a href="#">QQ空间</a>
+						<a href="#">官方微博</a>
+						<a href="#">手机客户端</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class=img-logo>
+					<div class="image1">
+						<!-- img:图片标签 -->
+						<img src="img/logo.png" />
+					</div>
+					<div class="image2">
+						<img src="img/slogan.png" />
+					</div>
+				</div>
+			</div>
+			
+			<!--菜单栏+菜单-->
+			<div class="container">
+				<div class="navbar navbar-default">
+					<div class="navbar-header">
+						<a class="navbar-brand">首页</a>
+						<button class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+							<span class="sr-only"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<!--<div class="navbar-collapse">-->
+					<div class="collapse navbar-collapse pull-right" id="menu">
+						<ul class="nav nav-tabs navbar-nav">
+					    <!--列表-->
+					        <li><a>企业日志</a></li>
+					        <li><a>企业文化</a></li>
+					        <li class="dropdown">
+					        	<a class="dropdown-toggle" data-toggle="dropdown">企业简介</a>
+					        	<ul class="dropdown-menu dropdown-menu-right">
+					        		<li><a>华信智源Java实训</a></li>
+					        		<li class="divider"> </li>
+					        		<li><a>金陵科技学院实习培训</a></li>
+					        	</ul>
+					        </li>
+				        </ul>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="container">
+				<!--无序表列-->
+				<ul class="nav nav-tabs">
+					<!--列表-->
+					<li><a href="http://www.baidu.com">菜单1</a>
+				    <li><a>菜单2</a></li>
+					<li><a>菜单3</a></li>
+					<li><a>菜单4</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">下拉菜单</a>
+						<ul class="dropdown-menu">
+							<li><a>menu1</a></li>
+							<li class="divider"> </li>
+							<li><a>menu2</a></li>
+							<li class="divider"> </li>
+							<li><a>menu3</a></li>
+							<li class="divider"> </li>
+							<li><a>menu4</a></li>		
+						</ul>
+					</li>
+					
+				</ul>
+			</div>
+			
+			
+			<div class="container">
+				<table class="table table-bordered">
+				    <caption>hhaha</caption>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>名字</th>
+							<th>昵称</th>
+							<th>密码</th>
+							<th>性别</th>
+							<th>年龄</th>
+							<th>用户类型</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		function getData() {
+			//Jquery:这里只使用JQuery的标志和ajax方法
+			//document.getElementById('id')==>$('id')
+			//{}:对象：键值对
+			$.ajax({
+				type:"post",
+				url:"http://localhost:8080/Day08_TestServlet/jdbc",
+				async:true,//是否异步请求
+				dataType:"json",//返回的数据类型
+				success:function(data){//当请求成功的时候调用的方法
+					$.each(data,function(n,value){//value:是每次的循环的值
+						$("tbody").append('<tr><td>'+value.id+'</td><td>'+value.name+'</td><td>'+value.nickname+'</td><td>'+value.password+'</td><td>'+value.age+'</td><td>'+value.sex+'</td><td>'+value.usertype+'</td></tr>');//追加内容
+					})
+				},
+				error:function(){
+					alert("请求失败");
+				}
+			});
+		}
+		getData();
+	</script>
+
+
+</html>

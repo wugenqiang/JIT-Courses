@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="   
+               http://www.springframework.org/schema/beans 
+               http://www.springframework.org/schema/beans/spring-beans.xsd   
+               http://www.springframework.org/schema/aop 
+               http://www.springframework.org/schema/aop/spring-aop.xsd   
+               http://www.springframework.org/schema/tx 
+               http://www.springframework.org/schema/tx/spring-tx.xsd 
+               http://www.springframework.org/schema/context 
+               http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--1 自动扫描 将标注Spring注解的类自动转化Bean -->
+	<context:component-scan base-package="com.wgq.*" />
+
+	<!-- 是否启用注解 -->
+	<tx:annotation-driven />
+
+	<!--2 加载数据资源属性文件 -->
+	<bean id="propertyConfigurerForTest"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:jdbc.properties</value>
+		</property>
+		<property name="fileEncoding">
+			<value>UTF-8</value>
+		</property>
+	</bean>
+
+	<!--3 配置数据源 JNDI获取数据源(使用dbcp连接池) -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource"> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<!-- 连接初始值，连接池启动时创建的连接数量的初始值 默认值是0 -->
+		<property name="initialSize" value="${initialSize}" />
+		<!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 默认值是0 -->
+		<property name="minIdle" value="${minIdle}" />
+		<!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 ，0时无限制 默认值是8 -->
+		<property name="maxIdle" value="${maxIdle}" />
+		<!-- 连接池的最大值，同一时间可以从池分配的最多连接数量，0时无限制 默认值是8 -->
+		<property name="maxTotal" value="${maxTotal}" />
+	</bean>
+
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath:com/wgq/mapper/*.xml"></property>
+	</bean>
+
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.wgq.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- (事务管理)配置一个事务管理,方便通过注解控制事务提交 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 通过注解来控制事务提交 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>  

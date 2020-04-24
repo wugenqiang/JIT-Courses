@@ -1,0 +1,69 @@
+1、GPIO控制多盏LED灯连续闪灭
+       #! /usr/bin/python
+       import time
+       import RPi.GPIO as GPIO
+       GPIO.setmode(GPIO.BOARD)
+       GPIO.setwarnings(False)
+       GPIO.setup(11,GPIO.OUT)
+       GPIO.setup(13,GPIO.OUT)
+       GPIO.setup(15,GPIO.OUT)
+
+       while True:
+                  GPIO.output(11,GPIO.LOW)
+                  time.sleep(.5)
+                  GPIO.output(11,GPIO.HIGH)
+                  GPIO.output(13,GPIO.LOW)
+                  time.sleep(.5)
+                  GPIO.output(13,GPIO.HIGH)
+                  GPIO.output(15,GPIO.LOW)
+                  time.sleep(.5)
+                  GPIO.output(15,GPIO.HIGH)
+
+
+2、跑马灯（LED灯轮流闪亮，然后换方向继续）
+byte ledPin[ ] = {2, 3, 4, 5, 7, 8, 9, 10, 11};    //以LED引脚创建数组
+
+int ledDelay(2500);
+
+int dir = 1;
+
+int currentLED = 0;
+
+unsigned long changeTime;
+
+void setup()
+{
+      for (int x=0; x<9; x++)      //设置所有引脚为输出模式
+     {
+           pinMode(ledPin[x], OUTPUT);
+     }
+      changeTime = millis();
+}
+
+void loop()  
+{       
+      if((millis() - changeTime) > ledDelay)    
+      {
+            changeLED();
+            changeTime = millis();
+       }
+
+}
+
+void changeLED()
+{  
+      for (int x=0; x<=8; x++) 
+     {   
+           digitalWrite(ledPin[x], HIGH);
+     }
+      digitalWrite(ledPin[currentLED], LOW);    //开一个灯
+      currentLED+=dir;
+      if (currentLED == 8) 
+      {
+           dir = -1;
+      }
+      if (currentLED == 0) 
+      {    
+           dir = 1;
+       }                      //让灯轮流亮，到底换方向
+}

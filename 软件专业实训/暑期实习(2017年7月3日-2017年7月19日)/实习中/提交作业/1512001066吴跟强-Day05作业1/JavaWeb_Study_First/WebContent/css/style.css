@@ -1,0 +1,31 @@
+/*头部样式*/
+/*选择器
+ *1、ID选择器 用#号
+ *2、CLASS选择器 用.
+ *3、元素选择器 元素名
+ *4、伪类选择器
+ *5、复合选择器
+ **/
+ .image1{
+    float:left;
+ }
+ .image2{
+    float:right;
+ }
+  .top{
+    width:100%;
+    height:30px;
+    text-align:center;
+    line-height:30px;
+    border-bottom:1px #ededed solid;
+    background-color:#fafafa;
+ }
+ .text{
+    float:right;
+ }
+ .img-logo{
+   margin-top:10px;
+ }
+ .container{
+   width:100%;
+ }

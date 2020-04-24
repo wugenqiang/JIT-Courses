@@ -1,0 +1,36 @@
+import time,subprocess
+while 1:
+        subprocess.call("clear")
+        print time.strftime("%H:%M:%S")
+        time.sleep(1)
+
+
+
+
+
+
+
+
+
+import serial
+import os
+import time,subprocess
+
+ser = serial.Serial('/dev/ttyACM0',9600,timeout=1)
+ser.open()
+try:
+   while 1:
+         subprocess.call("clear")
+         i=os.system('clear')
+         response = ser.readline()
+         print time.strftime('%H%M')
+         print response
+         ser.write('{0:5}'.format(time.strftime('%H%M')))
+         time.sleep(1)
+except KeyboardInterrupt:
+         ser.close()
+
+
+
+
+

@@ -1,0 +1,31 @@
+1、监视开关状态并在屏幕上显示“OK”。
+
+        #！/usr/bin/python
+        import time  
+        import RPi.GPIO as GPIO   
+        GPIO.setmode(GPIO.BOARD)   //设置模式
+        GPIO.setup(11, GPIO.IN)    //把pin11配置为input模式以接收开关状态
+        while True: 
+                   mybutton = GPIO.input(11) //读开关状态是否按下
+                   if mybutton == False: 
+                      print “OK”
+                   time.sleep(.2) //让程序休息0.2秒。
+        GPIO.cleanup()//退出时清理通道
+
+   输入
+       sudo python mybutton.py
+   来启动程序，按下开关，可以看见屏幕上出现的“OK”
+
+
+2、控制GPIO，使得LED灯闪亮
+        #！/usr/bin/python
+        import time  
+        import RPi.GPIO as GPIO   
+        GPIO.setmode(GPIO.BOARD) //设置模式
+        GPIO.setup(11, GPIO.OUT) //把pin11配置为outnput模式以接收开关状态
+        while True:
+                   GPIO.output(11,GPIO.HIGH)
+                   time.sleep(1)
+                   GPIO.output(11,GPIO.LOW)
+                   time.sleep(1)
+        GPIO.cleanup()//退出时清理通道
